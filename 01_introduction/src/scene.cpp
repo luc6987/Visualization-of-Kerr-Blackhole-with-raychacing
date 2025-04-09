@@ -10,12 +10,12 @@ void scene_structure::initialize()
 	camera_control.initialize(inputs, window); 
 	camera_control.set_rotation_axis_z();
 	camera_control.look_at(
-    { 0.0f, -10.0f, 5.0f }, // 摄像机位置
+    { 0.0f, 0.0f, 15.0f }, // 摄像机位置
 	{ 0.0f,  0.0f, 0.0f }, // 观察点
 	{ 0.0f,  0.0f, 1.0f }  // 上方向
 	);
 	
-
+	
 	// 显示帮助信息
 	display_info();
 
@@ -42,15 +42,17 @@ void scene_structure::initialize()
 }
 
 void scene_structure::display_frame()
-{   
-
+{   environment.uniform_generic.uniform_int["background_type"] = environment.background.type;
+	environment.uniform_generic.uniform_float["background_scale"] = environment.background.scale;
+	environment.uniform_generic.uniform_float["background_distance"] = environment.background.distance;	
+	environment.uniform_generic.uniform_vec3["cam_pos"] = camera_control.camera_model.position();
 	environment.uniform_generic.uniform_float["fov_y"] = camera_projection.field_of_view * 180.0f / Pi;
-environment.uniform_generic.uniform_float["aspect_ratio"] = camera_projection.aspect_ratio;
-environment.uniform_generic.uniform_vec2["resolution"] = {window.width, window.height};
-environment.uniform_generic.uniform_int["show_blackhole"] = gui.show_blackhole ? 1 : 0;
-
-
-
+	environment.uniform_generic.uniform_float["aspect_ratio"] = camera_projection.aspect_ratio;
+	environment.uniform_generic.uniform_vec2["resolution"] = {window.width, window.height};
+	environment.uniform_generic.uniform_int["show_blackhole"] = gui.show_blackhole ? 1 : 0;
+	mat4 const& cam_frame = camera_control.camera_model.matrix_frame();
+	environment.uniform_generic.uniform_mat3["cam_orientation"] = mat3(cam_frame);
+	
 	glDisable(GL_DEPTH_TEST); // 不需要深度测试
 	timer.update();
 	environment.uniform_generic.uniform_float["time"] = timer.t;
@@ -64,9 +66,17 @@ environment.uniform_generic.uniform_int["show_blackhole"] = gui.show_blackhole ?
 }
 
 void scene_structure::display_gui()
-{   ImGui::Checkbox("Show black hole", &gui.show_blackhole);
+{   cgp::vec3 cam_position = camera_control.camera_model.position();
+
+	ImGui::SliderFloat("Background scale", &environment.background.scale, 0.1f, 10.0f);
+	ImGui::SliderFloat("Background distance", &environment.background.distance, 1.0f, 50.0f);
+	ImGui::Combo("Background type", &environment.background.type, "Checkerboard\0Gradient\0Stars\0");
+
+	ImGui::Checkbox("Show black hole", &gui.show_blackhole);
 	ImGui::Checkbox("Frame", &gui.display_frame);
 	ImGui::SliderFloat("camera_pov", &camera_projection.field_of_view, 0.0f, 5.0f);
+	ImGui::Text("Cam pos: (%.2f, %.2f, %.2f)", cam_position.x, cam_position.y, cam_position.z);
+
 }
 
 void scene_structure::mouse_move_event()

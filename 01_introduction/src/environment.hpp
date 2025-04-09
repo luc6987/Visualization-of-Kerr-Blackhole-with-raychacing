@@ -8,7 +8,11 @@ using namespace cgp;
 // This file contains variables defining your global scene environment.
 // ********************************************************************* //
 
-
+struct background_structure {
+    int type = 0;                // 0: checkerboard, 1: gradient, 2: stars
+    float scale = 2.0f;          // 棋盘格缩放因子
+    float distance = 10.0f;      // 背景屏幕 z = -distance
+};
 // An environment structure contains variables that are needed to the drawing of an element in the scene, but that are not related to a particular shape or mesh.
 // The environment contains typically the camera and the light.
 struct environment_structure : environment_generic_structure
@@ -28,7 +32,8 @@ struct environment_structure : environment_generic_structure
 	// Additional uniforms that can be attached to the environment if needed (empty by default)
 	uniform_generic_structure uniform_generic;
 
-
+	// The shader used to draw the background
+	background_structure background;
 	// This function will be called in the draw() call of a drawable element.
 	//  The function is expected to send the uniform variables to the shader (e.g. camera, light)
 	void send_opengl_uniform(opengl_shader_structure const& shader, bool expected = default_expected_uniform) const override;
