@@ -1,3 +1,3 @@
-/Users/yuguang/Documents/X/2A-P3/CSC_43043_EP/csc43043ep_practice_code/scenes_csc43043ep/01_introduction/build/CMakeFiles/01_introduction.dir
-/Users/yuguang/Documents/X/2A-P3/CSC_43043_EP/csc43043ep_practice_code/scenes_csc43043ep/01_introduction/build/CMakeFiles/edit_cache.dir
-/Users/yuguang/Documents/X/2A-P3/CSC_43043_EP/csc43043ep_practice_code/scenes_csc43043ep/01_introduction/build/CMakeFiles/rebuild_cache.dir
+C:/Users/gauth/Cpp_library/csc43043ep_practice_code/Visualization-of-Kerr-Blackhole-with-raychacing-main/01_Introduction/build/CMakeFiles/01_Introduction.dir
+C:/Users/gauth/Cpp_library/csc43043ep_practice_code/Visualization-of-Kerr-Blackhole-with-raychacing-main/01_Introduction/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/gauth/Cpp_library/csc43043ep_practice_code/Visualization-of-Kerr-Blackhole-with-raychacing-main/01_Introduction/build/CMakeFiles/ZERO_CHECK.dir

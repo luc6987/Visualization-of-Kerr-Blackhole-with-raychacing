@@ -1,0 +1,1256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\01_base\basic_types\basic_types.cpp">
+      <Filter>cgp\01_base\basic_types</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\01_base\error\error.cpp">
+      <Filter>cgp\01_base\error</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\01_base\string\string.cpp">
+      <Filter>cgp\01_base\string</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray\test\test_numarray.cpp">
+      <Filter>cgp\02_numarray\numarray\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray_stack\special_types\special_types.cpp">
+      <Filter>cgp\02_numarray\numarray_stack\special_types</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray_stack\test\test_numarray_stack.cpp">
+      <Filter>cgp\02_numarray\numarray_stack\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\03_files\files.cpp">
+      <Filter>cgp\03_files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\grid\test\test_grid.cpp">
+      <Filter>cgp\04_grid_container\grid\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\grid_stack\grid_stack_2D\test\test_grid_stack_2D.cpp">
+      <Filter>cgp\04_grid_container\grid_stack\grid_stack_2D\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\matrix_stack\special_types\definition\special_types.cpp">
+      <Filter>cgp\04_grid_container\matrix_stack\special_types\definition</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\offset_grid\offset_grid.cpp">
+      <Filter>cgp\04_grid_container\offset_grid</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\functions\mat_functions.cpp">
+      <Filter>cgp\06_mat\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\functions\test\test_vec_mat.cpp">
+      <Filter>cgp\06_mat\functions\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\mat2\mat2.cpp">
+      <Filter>cgp\06_mat\mat2</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\mat3\mat3.cpp">
+      <Filter>cgp\06_mat\mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\mat4\mat4.cpp">
+      <Filter>cgp\06_mat\mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\test\test_matrix_stack.cpp">
+      <Filter>cgp\06_mat\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\07_image\image.cpp">
+      <Filter>cgp\07_image</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\08_random_noise\noise\noise.cpp">
+      <Filter>cgp\08_random_noise\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\08_random_noise\rand\rand.cpp">
+      <Filter>cgp\08_random_noise\rand</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\affine\affine\affine.cpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\affine\affine_rt\affine_rt.cpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine_rt</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\affine\affine_rts\affine_rts.cpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine_rts</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\frame\frame.cpp">
+      <Filter>cgp\09_geometric_transformation\frame</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\interpolation\interpolation.cpp">
+      <Filter>cgp\09_geometric_transformation\interpolation</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\projection\projection.cpp">
+      <Filter>cgp\09_geometric_transformation\projection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\quaternion\quaternion.cpp">
+      <Filter>cgp\09_geometric_transformation\quaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\rotation_transform\rotation_transform.cpp">
+      <Filter>cgp\09_geometric_transformation\rotation_transform</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\rotation_transform\test\test_rotation.cpp">
+      <Filter>cgp\09_geometric_transformation\rotation_transform\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\camera_first_person\camera_first_person.cpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_first_person</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\camera_first_person_euler\camera_first_person_euler.cpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_first_person_euler</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\camera_generic_base\camera_generic_base.cpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_generic_base</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\camera_orbit\camera_orbit.cpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_orbit</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\camera_orbit_euler\camera_orbit_euler.cpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_orbit_euler</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\common_functions\common_functions.cpp">
+      <Filter>cgp\10_camera_model\camera_model\common_functions</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_projection\camera_projection.cpp">
+      <Filter>cgp\10_camera_model\camera_projection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\11_mesh\mesh\mesh.cpp">
+      <Filter>cgp\11_mesh\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\11_mesh\primitive\primitive.cpp">
+      <Filter>cgp\11_mesh\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\bounding_box\bounding_box.cpp">
+      <Filter>cgp\12_shape\bounding_box</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\curve\curve.cpp">
+      <Filter>cgp\12_shape\curve</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\implicit\marching_cube\helper\marching_cubes_lut.cpp">
+      <Filter>cgp\12_shape\implicit\marching_cube\helper</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\implicit\marching_cube\marching_cube.cpp">
+      <Filter>cgp\12_shape\implicit\marching_cube</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\intersection\intersection.cpp">
+      <Filter>cgp\12_shape\intersection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\spatial_domain\spatial_domain_grid_3D\spatial_domain_grid_3D.cpp">
+      <Filter>cgp\12_shape\spatial_domain\spatial_domain_grid_3D</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\buffer\ebo\ebo.cpp">
+      <Filter>cgp\13_opengl\buffer\ebo</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\buffer\opengl_buffer\opengl_buffer.cpp">
+      <Filter>cgp\13_opengl\buffer\opengl_buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\buffer\vbo\vbo.cpp">
+      <Filter>cgp\13_opengl\buffer\vbo</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\debug\debug.cpp">
+      <Filter>cgp\13_opengl\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\emscripten\emscripten.cpp">
+      <Filter>cgp\13_opengl\emscripten</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\fbo\fbo.cpp">
+      <Filter>cgp\13_opengl\fbo</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\shaders\cache_uniform_location\cache_uniform_location.cpp">
+      <Filter>cgp\13_opengl\shaders\cache_uniform_location</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\shaders\shaders.cpp">
+      <Filter>cgp\13_opengl\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\texture\texture.cpp">
+      <Filter>cgp\13_opengl\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\uniform\uniform.cpp">
+      <Filter>cgp\13_opengl\uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\14_window\imgui\imgui.cpp">
+      <Filter>cgp\14_window\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\14_window\window\window.cpp">
+      <Filter>cgp\14_window\window</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\15_input_devices\input_devices.cpp">
+      <Filter>cgp\15_input_devices</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\curve_drawable\curve_drawable.cpp">
+      <Filter>cgp\16_drawable\curve_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\curve_drawable_dynamic_extend\curve_drawable_dynamic_extend.cpp">
+      <Filter>cgp\16_drawable\curve_drawable_dynamic_extend</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\environment\environment.cpp">
+      <Filter>cgp\16_drawable\environment</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable.cpp">
+      <Filter>cgp\16_drawable\hierarchy_mesh_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\material\material_mesh_drawable_phong\material_mesh_drawable_phong.cpp">
+      <Filter>cgp\16_drawable\material\material_mesh_drawable_phong</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\mesh_drawable\mesh_drawable.cpp">
+      <Filter>cgp\16_drawable\mesh_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\special_drawable\skybox_drawable\skybox_drawable.cpp">
+      <Filter>cgp\16_drawable\special_drawable\skybox_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\special_drawable\trajectory_drawable\trajectory_drawable.cpp">
+      <Filter>cgp\16_drawable\special_drawable\trajectory_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\triangles_drawable\triangles_drawable.cpp">
+      <Filter>cgp\16_drawable\triangles_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\17_timer\timer_basic\timer_basic.cpp">
+      <Filter>cgp\17_timer\timer_basic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\17_timer\timer_event_periodic\timer_event_periodic.cpp">
+      <Filter>cgp\17_timer\timer_event_periodic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\17_timer\timer_fps\timer_fps.cpp">
+      <Filter>cgp\17_timer\timer_fps</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\17_timer\timer_interval\timer_interval.cpp">
+      <Filter>cgp\17_timer\timer_interval</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\18_user_interactions\picking\picking_plane\picking_plane.cpp">
+      <Filter>cgp\18_user_interactions\picking\picking_plane</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\18_user_interactions\picking\picking_spheres\picking_spheres.cpp">
+      <Filter>cgp\18_user_interactions\picking\picking_spheres</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\18_user_interactions\picking\picking_structure\picking_structure.cpp">
+      <Filter>cgp\18_user_interactions\picking\picking_structure</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\18_user_interactions\tracker\velocity_tracker\velocity_tracker.cpp">
+      <Filter>cgp\18_user_interactions\tracker\velocity_tracker</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_2d_displacement\camera_controller_2d_displacement.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_2d_displacement</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_first_person\camera_controller_first_person.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_first_person</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_first_person_euler\camera_controller_first_person_euler.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_first_person_euler</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_fly_mode\camera_controller_fly_mode.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_fly_mode</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_generic_base\camera_controller_generic_base.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_generic_base</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_orbit\camera_controller_orbit.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_orbit</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_orbit_euler\camera_controller_orbit_euler.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_orbit_euler</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\test\test_camera_controller.cpp">
+      <Filter>cgp\19_camera_controller\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\20_format_parser\mesh_loader\obj\obj.cpp">
+      <Filter>cgp\20_format_parser\mesh_loader\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\20_format_parser\mesh_loader\obj_advanced\obj_advanced.cpp">
+      <Filter>cgp\20_format_parser\mesh_loader\obj_advanced</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\21_scene_project_helper\path\path.cpp">
+      <Filter>cgp\21_scene_project_helper\path</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl33\glad.cpp">
+      <Filter>third_party\src\glad\opengl33</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl41\glad.cpp">
+      <Filter>third_party\src\glad\opengl41</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl43\glad.cpp">
+      <Filter>third_party\src\glad\opengl43</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl46\glad.cpp">
+      <Filter>third_party\src\glad\opengl46</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imgui.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imgui_demo.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imgui_draw.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imgui_impl_glfw.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imgui_impl_opengl3.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imgui_widgets.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\jpeg\jpgd.cpp">
+      <Filter>third_party\src\jpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\jpeg\jpge.cpp">
+      <Filter>third_party\src\jpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\lodepng\lodepng.cpp">
+      <Filter>third_party\src\lodepng</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\simplexnoise\simplexnoise1234.cpp">
+      <Filter>third_party\src\simplexnoise</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\src\environment.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\src\scene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\01_base\base.hpp">
+      <Filter>cgp\01_base</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\01_base\basic_types\basic_types.hpp">
+      <Filter>cgp\01_base\basic_types</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\01_base\error\error.hpp">
+      <Filter>cgp\01_base\error</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\01_base\stl\stl.hpp">
+      <Filter>cgp\01_base\stl</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\01_base\string\string.hpp">
+      <Filter>cgp\01_base\string</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\01_base\types\types.hpp">
+      <Filter>cgp\01_base\types</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray.hpp">
+      <Filter>cgp\02_numarray</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray\numarray.hpp">
+      <Filter>cgp\02_numarray\numarray</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray\test\test_numarray.hpp">
+      <Filter>cgp\02_numarray\numarray\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray_stack\implementation\numarray_stack.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray_stack\implementation\numarray_stack2.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray_stack\implementation\numarray_stack3.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray_stack\implementation\numarray_stack4.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray_stack\numarray_stack.hpp">
+      <Filter>cgp\02_numarray\numarray_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray_stack\numarray_stack_fwd.hpp">
+      <Filter>cgp\02_numarray\numarray_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray_stack\special_types\special_types.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\special_types</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\02_numarray\numarray_stack\test\test_numarray_stack.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\03_files\files.hpp">
+      <Filter>cgp\03_files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\grid\grid.hpp">
+      <Filter>cgp\04_grid_container\grid</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\grid\grid_2D\grid_2D.hpp">
+      <Filter>cgp\04_grid_container\grid\grid_2D</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\grid\grid_3D\grid_3D.hpp">
+      <Filter>cgp\04_grid_container\grid\grid_3D</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\grid\test\test_grid.hpp">
+      <Filter>cgp\04_grid_container\grid\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\grid_container.hpp">
+      <Filter>cgp\04_grid_container</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\grid_stack\grid_stack.hpp">
+      <Filter>cgp\04_grid_container\grid_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\grid_stack\grid_stack_2D\grid_stack_2D.hpp">
+      <Filter>cgp\04_grid_container\grid_stack\grid_stack_2D</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\grid_stack\grid_stack_2D\test\test_grid_stack_2D.hpp">
+      <Filter>cgp\04_grid_container\grid_stack\grid_stack_2D\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\matrix_stack\matrix_stack.hpp">
+      <Filter>cgp\04_grid_container\matrix_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\matrix_stack\matrix_stack_fwd.hpp">
+      <Filter>cgp\04_grid_container\matrix_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\matrix_stack\special_types\definition\special_types.hpp">
+      <Filter>cgp\04_grid_container\matrix_stack\special_types\definition</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\matrix_stack\special_types\special_types.hpp">
+      <Filter>cgp\04_grid_container\matrix_stack\special_types</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\04_grid_container\offset_grid\offset_grid.hpp">
+      <Filter>cgp\04_grid_container\offset_grid</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\05_vec\vec.hpp">
+      <Filter>cgp\05_vec</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\05_vec\vec2\vec2.hpp">
+      <Filter>cgp\05_vec\vec2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\05_vec\vec3\vec3.hpp">
+      <Filter>cgp\05_vec\vec3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\05_vec\vec4\vec4.hpp">
+      <Filter>cgp\05_vec\vec4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\functions\mat_functions.hpp">
+      <Filter>cgp\06_mat\functions</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\functions\test\test_vec_mat.hpp">
+      <Filter>cgp\06_mat\functions\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\mat.hpp">
+      <Filter>cgp\06_mat</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\mat2\mat2.hpp">
+      <Filter>cgp\06_mat\mat2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\mat3\mat3.hpp">
+      <Filter>cgp\06_mat\mat3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\mat4\mat4.hpp">
+      <Filter>cgp\06_mat\mat4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\06_mat\test\test_matrix_stack.hpp">
+      <Filter>cgp\06_mat\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\07_image\image.hpp">
+      <Filter>cgp\07_image</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\08_random_noise\noise\noise.hpp">
+      <Filter>cgp\08_random_noise\noise</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\08_random_noise\rand\rand.hpp">
+      <Filter>cgp\08_random_noise\rand</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\08_random_noise\random_noise.hpp">
+      <Filter>cgp\08_random_noise</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\affine\affine.hpp">
+      <Filter>cgp\09_geometric_transformation\affine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\affine\affine\affine.hpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\affine\affine_rt\affine_rt.hpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine_rt</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\affine\affine_rts\affine_rts.hpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine_rts</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\frame\frame.hpp">
+      <Filter>cgp\09_geometric_transformation\frame</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\geometric_transformation.hpp">
+      <Filter>cgp\09_geometric_transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\interpolation\interpolation.hpp">
+      <Filter>cgp\09_geometric_transformation\interpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\projection\projection.hpp">
+      <Filter>cgp\09_geometric_transformation\projection</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\quaternion\quaternion.hpp">
+      <Filter>cgp\09_geometric_transformation\quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\rotation_transform\rotation_transform.hpp">
+      <Filter>cgp\09_geometric_transformation\rotation_transform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\09_geometric_transformation\rotation_transform\test\test_rotation.hpp">
+      <Filter>cgp\09_geometric_transformation\rotation_transform\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model.hpp">
+      <Filter>cgp\10_camera_model</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\camera_first_person\camera_first_person.hpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_first_person</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\camera_first_person_euler\camera_first_person_euler.hpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_first_person_euler</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\camera_generic_base\camera_generic_base.hpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_generic_base</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\camera_model.hpp">
+      <Filter>cgp\10_camera_model\camera_model</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\camera_orbit\camera_orbit.hpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_orbit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\camera_orbit_euler\camera_orbit_euler.hpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_orbit_euler</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_model\common_functions\common_functions.hpp">
+      <Filter>cgp\10_camera_model\camera_model\common_functions</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\10_camera_model\camera_projection\camera_projection.hpp">
+      <Filter>cgp\10_camera_model\camera_projection</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\11_mesh\mesh.hpp">
+      <Filter>cgp\11_mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\11_mesh\mesh\mesh.hpp">
+      <Filter>cgp\11_mesh\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\11_mesh\primitive\primitive.hpp">
+      <Filter>cgp\11_mesh\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\bounding_box\bounding_box.hpp">
+      <Filter>cgp\12_shape\bounding_box</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\curve\curve.hpp">
+      <Filter>cgp\12_shape\curve</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\implicit\implicit.hpp">
+      <Filter>cgp\12_shape\implicit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\implicit\marching_cube\helper\marching_cubes_lut.hpp">
+      <Filter>cgp\12_shape\implicit\marching_cube\helper</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\implicit\marching_cube\marching_cube.hpp">
+      <Filter>cgp\12_shape\implicit\marching_cube</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\intersection\intersection.hpp">
+      <Filter>cgp\12_shape\intersection</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\shape.hpp">
+      <Filter>cgp\12_shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\spatial_domain\spatial_domain.hpp">
+      <Filter>cgp\12_shape\spatial_domain</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\12_shape\spatial_domain\spatial_domain_grid_3D\spatial_domain_grid_3D.hpp">
+      <Filter>cgp\12_shape\spatial_domain\spatial_domain_grid_3D</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\buffer\buffer.hpp">
+      <Filter>cgp\13_opengl\buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\buffer\ebo\ebo.hpp">
+      <Filter>cgp\13_opengl\buffer\ebo</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\buffer\opengl_buffer\opengl_buffer.hpp">
+      <Filter>cgp\13_opengl\buffer\opengl_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\buffer\vbo\vbo.hpp">
+      <Filter>cgp\13_opengl\buffer\vbo</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\debug\debug.hpp">
+      <Filter>cgp\13_opengl\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\emscripten\emscripten.hpp">
+      <Filter>cgp\13_opengl\emscripten</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\fbo\fbo.hpp">
+      <Filter>cgp\13_opengl\fbo</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\opengl.hpp">
+      <Filter>cgp\13_opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\shaders\cache_uniform_location\cache_uniform_location.hpp">
+      <Filter>cgp\13_opengl\shaders\cache_uniform_location</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\shaders\shaders.hpp">
+      <Filter>cgp\13_opengl\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\texture\texture.hpp">
+      <Filter>cgp\13_opengl\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\13_opengl\uniform\uniform.hpp">
+      <Filter>cgp\13_opengl\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\14_window\imgui\imgui.hpp">
+      <Filter>cgp\14_window\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\14_window\window.hpp">
+      <Filter>cgp\14_window</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\14_window\window\window.hpp">
+      <Filter>cgp\14_window\window</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\15_input_devices\input_devices.hpp">
+      <Filter>cgp\15_input_devices</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\curve_drawable\curve_drawable.hpp">
+      <Filter>cgp\16_drawable\curve_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\curve_drawable_dynamic_extend\curve_drawable_dynamic_extend.hpp">
+      <Filter>cgp\16_drawable\curve_drawable_dynamic_extend</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\drawable.hpp">
+      <Filter>cgp\16_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\environment\environment.hpp">
+      <Filter>cgp\16_drawable\environment</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable.hpp">
+      <Filter>cgp\16_drawable\hierarchy_mesh_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\material\material.hpp">
+      <Filter>cgp\16_drawable\material</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\material\material_mesh_drawable_phong\material_mesh_drawable_phong.hpp">
+      <Filter>cgp\16_drawable\material\material_mesh_drawable_phong</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\mesh_drawable\mesh_drawable.hpp">
+      <Filter>cgp\16_drawable\mesh_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\special_drawable\skybox_drawable\skybox_drawable.hpp">
+      <Filter>cgp\16_drawable\special_drawable\skybox_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\special_drawable\special_drawable.hpp">
+      <Filter>cgp\16_drawable\special_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\special_drawable\trajectory_drawable\trajectory_drawable.hpp">
+      <Filter>cgp\16_drawable\special_drawable\trajectory_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\16_drawable\triangles_drawable\triangles_drawable.hpp">
+      <Filter>cgp\16_drawable\triangles_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\17_timer\timer.hpp">
+      <Filter>cgp\17_timer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\17_timer\timer_basic\timer_basic.hpp">
+      <Filter>cgp\17_timer\timer_basic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\17_timer\timer_event_periodic\timer_event_periodic.hpp">
+      <Filter>cgp\17_timer\timer_event_periodic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\17_timer\timer_fps\timer_fps.hpp">
+      <Filter>cgp\17_timer\timer_fps</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\17_timer\timer_interval\timer_interval.hpp">
+      <Filter>cgp\17_timer\timer_interval</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\18_user_interactions\picking\picking.hpp">
+      <Filter>cgp\18_user_interactions\picking</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\18_user_interactions\picking\picking_plane\picking_plane.hpp">
+      <Filter>cgp\18_user_interactions\picking\picking_plane</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\18_user_interactions\picking\picking_spheres\picking_spheres.hpp">
+      <Filter>cgp\18_user_interactions\picking\picking_spheres</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\18_user_interactions\picking\picking_structure\picking_structure.hpp">
+      <Filter>cgp\18_user_interactions\picking\picking_structure</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\18_user_interactions\tracker\tracker.hpp">
+      <Filter>cgp\18_user_interactions\tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\18_user_interactions\tracker\velocity_tracker\velocity_tracker.hpp">
+      <Filter>cgp\18_user_interactions\tracker\velocity_tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\18_user_interactions\user_interactions.hpp">
+      <Filter>cgp\18_user_interactions</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller.hpp">
+      <Filter>cgp\19_camera_controller</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_2d_displacement\camera_controller_2d_displacement.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_2d_displacement</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_first_person\camera_controller_first_person.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_first_person</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_first_person_euler\camera_controller_first_person_euler.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_first_person_euler</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_fly_mode\camera_controller_fly_mode.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_fly_mode</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_generic_base\camera_controller_generic_base.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_generic_base</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_orbit\camera_controller_orbit.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_orbit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\camera_controller_orbit_euler\camera_controller_orbit_euler.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_orbit_euler</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\19_camera_controller\test\test_camera_controller.hpp">
+      <Filter>cgp\19_camera_controller\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\20_format_parser\format_parser.hpp">
+      <Filter>cgp\20_format_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\20_format_parser\mesh_loader\mesh_loader.hpp">
+      <Filter>cgp\20_format_parser\mesh_loader</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\20_format_parser\mesh_loader\obj\obj.hpp">
+      <Filter>cgp\20_format_parser\mesh_loader\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\20_format_parser\mesh_loader\obj_advanced\obj_advanced.hpp">
+      <Filter>cgp\20_format_parser\mesh_loader\obj_advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\21_scene_project_helper\path\path.hpp">
+      <Filter>cgp\21_scene_project_helper\path</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\21_scene_project_helper\scene_project_helper.hpp">
+      <Filter>cgp\21_scene_project_helper</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\cgp.hpp">
+      <Filter>cgp</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\cgp_parameters.hpp">
+      <Filter>cgp</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\cgp\opengl_include.hpp">
+      <Filter>cgp</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl33\glad.hpp">
+      <Filter>third_party\src\glad\opengl33</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl33\khrplatform.hpp">
+      <Filter>third_party\src\glad\opengl33</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl41\glad.hpp">
+      <Filter>third_party\src\glad\opengl41</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl41\khrplatform.hpp">
+      <Filter>third_party\src\glad\opengl41</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl43\glad.hpp">
+      <Filter>third_party\src\glad\opengl43</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl43\khrplatform.hpp">
+      <Filter>third_party\src\glad\opengl43</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl46\glad.hpp">
+      <Filter>third_party\src\glad\opengl46</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\glad\opengl46\khrplatform.hpp">
+      <Filter>third_party\src\glad\opengl46</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imconfig.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imgui.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imgui_impl_glfw.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imgui_impl_opengl3.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imgui_internal.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imstb_rectpack.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imstb_textedit.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\imgui\imstb_truetype.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\jpeg\jpgd.h">
+      <Filter>third_party\src\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\jpeg\jpge.h">
+      <Filter>third_party\src\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\lodepng\lodepng.h">
+      <Filter>third_party\src\lodepng</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\simplexnoise\simplexnoise1234.hpp">
+      <Filter>third_party\src\simplexnoise</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\cgp\library\third_party\src\tinyobj\tiny_obj_loader.hpp">
+      <Filter>third_party\src\tinyobj</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\src\environment.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\src\scene.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\shaders\mesh\mesh.frag.glsl">
+      <Filter>shaders\mesh</Filter>
+    </None>
+    <None Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\shaders\mesh\mesh.vert.glsl">
+      <Filter>shaders\mesh</Filter>
+    </None>
+    <None Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\shaders\screen_quad\screen_quad.frag.glsl">
+      <Filter>shaders\screen_quad</Filter>
+    </None>
+    <None Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\shaders\screen_quad\screen_quad.vert.glsl">
+      <Filter>shaders\screen_quad</Filter>
+    </None>
+    <None Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\shaders\single_color\screen_quad.frag.glsl">
+      <Filter>shaders\single_color</Filter>
+    </None>
+    <None Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\shaders\single_color\single_color.frag.glsl">
+      <Filter>shaders\single_color</Filter>
+    </None>
+    <None Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\shaders\single_color\single_color.vert.glsl">
+      <Filter>shaders\single_color</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="cgp">
+      <UniqueIdentifier>{415384C7-7F15-349A-8D51-1A44821BE249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base">
+      <UniqueIdentifier>{A5A254B8-4316-3C8C-A75C-E83ECCDA0D84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base\basic_types">
+      <UniqueIdentifier>{EC216F8A-08BA-3301-B00B-E97EF7AF198D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base\error">
+      <UniqueIdentifier>{9AC338A1-0A58-3E88-83E1-5592B46DF047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base\stl">
+      <UniqueIdentifier>{7B06859B-CC88-3E54-A7CF-D3D22771226E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base\string">
+      <UniqueIdentifier>{52625A03-9AB7-37A4-910D-C6E4A99EA925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base\types">
+      <UniqueIdentifier>{9365E947-EFA5-3AD2-B57C-4769CB7C9008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray">
+      <UniqueIdentifier>{44AD5E96-C282-372E-B130-47CF509D8888}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray">
+      <UniqueIdentifier>{BEFCB444-7B12-399A-AE44-A5441202DAD9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray\test">
+      <UniqueIdentifier>{A9F766FD-0A95-356E-8589-A1D3008DB236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray_stack">
+      <UniqueIdentifier>{C0FCEC17-5454-390A-A7F3-8F103374A637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray_stack\implementation">
+      <UniqueIdentifier>{2F84913A-A9FD-3CEF-9CA5-D5D99FED4FF6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray_stack\special_types">
+      <UniqueIdentifier>{3F649BC9-88B1-3F15-AD40-805E8C361B01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray_stack\test">
+      <UniqueIdentifier>{488B3A73-4120-3AA3-966E-3E6062AE9108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\03_files">
+      <UniqueIdentifier>{832758A3-0FE9-3601-B407-CB7093404E6B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container">
+      <UniqueIdentifier>{2356C770-7AFC-34A1-BE18-09C1EF28781F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid">
+      <UniqueIdentifier>{DC9419F5-D33D-3B35-A282-1B92B03DC3DE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid\grid_2D">
+      <UniqueIdentifier>{9F2B4770-59F1-3690-9234-60DFF78D5139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid\grid_3D">
+      <UniqueIdentifier>{18446A08-B1E8-396C-8667-170F86E46744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid\test">
+      <UniqueIdentifier>{053B19E7-2D90-355C-8C63-F63BFD2E4D81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid_stack">
+      <UniqueIdentifier>{6033CEB1-21B6-348E-9638-5E06441117B0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid_stack\grid_stack_2D">
+      <UniqueIdentifier>{75220591-3720-31DC-8083-0EC99FFC955C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid_stack\grid_stack_2D\test">
+      <UniqueIdentifier>{5FEA673B-1D4C-3587-8119-936994D49D60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\matrix_stack">
+      <UniqueIdentifier>{10189F90-D844-3C47-A95C-5C084AB7939A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\matrix_stack\special_types">
+      <UniqueIdentifier>{114F37CB-DD57-3404-BA12-A5E4683B9F26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\matrix_stack\special_types\definition">
+      <UniqueIdentifier>{C350474F-C007-35E2-BDE7-3A70EE30D0EE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\offset_grid">
+      <UniqueIdentifier>{88B1937C-F98D-3A5A-9290-9B235EDC3D2D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\05_vec">
+      <UniqueIdentifier>{13F1FD69-1FCB-38E3-96F1-2CFA47419892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\05_vec\vec2">
+      <UniqueIdentifier>{82825CBA-4FB8-3176-8A8C-C004C472D7C9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\05_vec\vec3">
+      <UniqueIdentifier>{4ADA8F1F-8ECC-39A1-856E-603E151AD00D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\05_vec\vec4">
+      <UniqueIdentifier>{0A63069D-F2B2-3BC0-8800-A3BDBEACD399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat">
+      <UniqueIdentifier>{0D4C5BBD-721D-3C59-A392-4774C718CDD2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\functions">
+      <UniqueIdentifier>{8F931AF6-56FB-3DA0-9CAB-93F2DB327FE9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\functions\test">
+      <UniqueIdentifier>{01A268E6-3CE4-386D-BA69-D92F030869B6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\mat2">
+      <UniqueIdentifier>{975C6BCF-EDB2-3684-8DD1-1CBB596A100E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\mat3">
+      <UniqueIdentifier>{426ECFE3-51B8-365B-8D67-46BBC7EB5944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\mat4">
+      <UniqueIdentifier>{FB845E83-E1D9-32B0-BC23-D1DBE858B442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\test">
+      <UniqueIdentifier>{43B0E366-78DF-3B70-B67A-04D01500590F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\07_image">
+      <UniqueIdentifier>{8CACAFAB-205F-31F0-86D5-FDA67C9847C4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\08_random_noise">
+      <UniqueIdentifier>{C8EA93CD-FE7C-33E7-BBF9-CA4D877E452F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\08_random_noise\noise">
+      <UniqueIdentifier>{E7D3AE3D-B560-3D96-874C-397D8BE08DB8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\08_random_noise\rand">
+      <UniqueIdentifier>{8219C3C9-D089-32E8-9DD6-26DAE5354FDB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation">
+      <UniqueIdentifier>{1166CF75-C833-39E9-8902-8B92D7474FB9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\affine">
+      <UniqueIdentifier>{A708F256-939F-3C1A-98CE-E544E738B059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\affine\affine">
+      <UniqueIdentifier>{EDB44729-FACA-3F05-B72B-E77171CF45CA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\affine\affine_rt">
+      <UniqueIdentifier>{2C23CE9B-8634-3DD3-A2E0-C9B47734463F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\affine\affine_rts">
+      <UniqueIdentifier>{70F49D2A-B001-34C5-BE42-CC7DF75831A0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\frame">
+      <UniqueIdentifier>{FF1C04C3-EF30-3D8A-BC7B-4F091226B1B9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\interpolation">
+      <UniqueIdentifier>{B81F5983-CD3C-3843-80FB-D452FD50E85A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\projection">
+      <UniqueIdentifier>{4CD40C22-035C-3FC2-9999-A3F44D29F162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\quaternion">
+      <UniqueIdentifier>{7A86EA38-FFDD-303D-B97A-973D04638006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\rotation_transform">
+      <UniqueIdentifier>{40CED307-2B17-33F6-876B-10A8DB430FF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\rotation_transform\test">
+      <UniqueIdentifier>{EE163C5B-1B7D-329C-95D3-782E924A2B99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model">
+      <UniqueIdentifier>{A5B5D0B4-8E7B-3323-A487-BF75B0842B3A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model">
+      <UniqueIdentifier>{82AB40FC-E97F-330C-B4F0-DB6681B9BAF8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\camera_first_person">
+      <UniqueIdentifier>{6F33CD88-FC0E-3E8A-BA69-1715BF58F733}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\camera_first_person_euler">
+      <UniqueIdentifier>{C2264AB5-4466-3D0B-B264-EC48E182333C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\camera_generic_base">
+      <UniqueIdentifier>{87E3AA82-98CE-3924-B359-FFFA8E1B3B9D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\camera_orbit">
+      <UniqueIdentifier>{63E8343A-4570-34F7-9263-6322F446CDE8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\camera_orbit_euler">
+      <UniqueIdentifier>{4056B5D0-24FB-3849-A8F9-82522D2820B4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\common_functions">
+      <UniqueIdentifier>{6AC9C640-CAE8-31A2-9598-0F495D257AE0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_projection">
+      <UniqueIdentifier>{8EB335E1-6862-3404-9033-3472BDC04000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\11_mesh">
+      <UniqueIdentifier>{E408345B-C720-3252-BE6E-10654208FF97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\11_mesh\mesh">
+      <UniqueIdentifier>{E82E97EE-BB60-3133-8953-9A4F8A244D00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\11_mesh\primitive">
+      <UniqueIdentifier>{BBF18860-1316-36BA-8A0F-5662C9E3F490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape">
+      <UniqueIdentifier>{7C69E0E7-2C00-37D3-B57E-7A3DAEFEECC1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\bounding_box">
+      <UniqueIdentifier>{F75E207C-E7B9-31DB-B0D0-276A45C48A40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\curve">
+      <UniqueIdentifier>{C043A4BE-4B45-3C52-B5EB-6A408831BD8F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\implicit">
+      <UniqueIdentifier>{3A0C708C-9502-3C66-8DE3-F3376A0DEFE1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\implicit\marching_cube">
+      <UniqueIdentifier>{2BDCE316-B374-3227-B5D2-130E34961693}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\implicit\marching_cube\helper">
+      <UniqueIdentifier>{1C01379E-81D1-32CE-91A7-4BDFABF85E50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\intersection">
+      <UniqueIdentifier>{586964F6-D36D-3916-9916-1C08A505282B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\spatial_domain">
+      <UniqueIdentifier>{9785B025-6604-30B3-96DB-0F060D9336EE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\spatial_domain\spatial_domain_grid_3D">
+      <UniqueIdentifier>{F0470C6E-BBA6-3AAE-A1FB-95DB89664D63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl">
+      <UniqueIdentifier>{A6E7367D-F9BB-3758-94D9-8D8587C494A7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\buffer">
+      <UniqueIdentifier>{CCA251E9-E54A-3193-B394-CD39BEE6BCB0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\buffer\ebo">
+      <UniqueIdentifier>{0361F886-D1AE-37A8-B0A8-E0F462961853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\buffer\opengl_buffer">
+      <UniqueIdentifier>{3E362F45-6334-3348-BEE1-685EA06B915D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\buffer\vbo">
+      <UniqueIdentifier>{5645056E-7A1D-3896-B1A2-DD71CF8955ED}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\debug">
+      <UniqueIdentifier>{FD48D8AE-245E-36A8-88BE-0A86261BDA84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\emscripten">
+      <UniqueIdentifier>{9996203A-7F6B-3C82-8763-B2A0196281B9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\fbo">
+      <UniqueIdentifier>{60C95346-9C1E-3886-9C2B-D99F8BE20325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\shaders">
+      <UniqueIdentifier>{3BC369A1-1C26-30A5-B773-45ECD0EC9B94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\shaders\cache_uniform_location">
+      <UniqueIdentifier>{3ABD798B-60B4-344D-85CD-8DF0684591CF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\texture">
+      <UniqueIdentifier>{1CA79B64-522E-3928-ADAC-764B7112A495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\uniform">
+      <UniqueIdentifier>{03F54C20-5A0D-3802-9E6D-4A5567F1FA77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\14_window">
+      <UniqueIdentifier>{6AA87507-C1A9-3D5E-81D7-7C8FE3A9D784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\14_window\imgui">
+      <UniqueIdentifier>{968EEEA7-1995-3B7B-A2A3-C473EBB8DF54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\14_window\window">
+      <UniqueIdentifier>{47DD9E40-F772-321C-8067-83752AE70386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\15_input_devices">
+      <UniqueIdentifier>{ABB68C51-549C-3F2B-BF49-60CAD9752841}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable">
+      <UniqueIdentifier>{C2C688AC-B41E-31D8-8074-963B74AAE42A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\curve_drawable">
+      <UniqueIdentifier>{58DFA3B4-F37E-3EEB-9037-34A0049D6485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\curve_drawable_dynamic_extend">
+      <UniqueIdentifier>{CFD1034A-B959-3E00-8A5D-0A29E7A6D502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\environment">
+      <UniqueIdentifier>{CE2A24D9-DE06-368E-99C8-8E223F552518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\hierarchy_mesh_drawable">
+      <UniqueIdentifier>{0A750C54-B7FE-3CE4-A182-18B7E8B98B59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\material">
+      <UniqueIdentifier>{8F19D7DC-54E8-3EEF-8ADE-D3834E799100}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\material\material_mesh_drawable_phong">
+      <UniqueIdentifier>{037FBDD2-E277-3AB1-AD55-A411FDB47B64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\mesh_drawable">
+      <UniqueIdentifier>{31C13616-9607-3024-B231-95F668B963FB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\special_drawable">
+      <UniqueIdentifier>{7DD65594-4B14-31E3-8A8B-8517FD86F104}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\special_drawable\skybox_drawable">
+      <UniqueIdentifier>{95A65FAC-CAEE-38D5-B274-2E9C72D240A2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\special_drawable\trajectory_drawable">
+      <UniqueIdentifier>{9E26AD3C-771E-31D4-8795-58231B7DC9BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\triangles_drawable">
+      <UniqueIdentifier>{3C3E8AA0-C4ED-3989-8C63-4D53D0DEFCF4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\17_timer">
+      <UniqueIdentifier>{185573DF-F608-334C-8A70-0AC3BE3C73AE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\17_timer\timer_basic">
+      <UniqueIdentifier>{F68120C7-6CD2-30F0-9D94-BEEFAEA6CE5E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\17_timer\timer_event_periodic">
+      <UniqueIdentifier>{E0CB242D-1101-36C3-A815-E91E64B5FFD1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\17_timer\timer_fps">
+      <UniqueIdentifier>{56F175AF-AF19-37E6-8EC8-4DDCFEE2AC0D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\17_timer\timer_interval">
+      <UniqueIdentifier>{3BE25B7B-26C8-3CBD-9278-3CBA8E12F44E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions">
+      <UniqueIdentifier>{72109EC3-E201-3E4A-BB96-F931A7A48500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\picking">
+      <UniqueIdentifier>{4DF83BEA-382F-373B-939D-7D58A778F34C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\picking\picking_plane">
+      <UniqueIdentifier>{19293203-D44C-3D47-86FE-172FC4EBC170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\picking\picking_spheres">
+      <UniqueIdentifier>{7A311203-DC5E-3635-BA68-4E076C373026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\picking\picking_structure">
+      <UniqueIdentifier>{C97BBD1D-5B2C-309B-8908-07ACB6ABE344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\tracker">
+      <UniqueIdentifier>{FE131CF0-40D9-3F13-9A44-D7D981880C38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\tracker\velocity_tracker">
+      <UniqueIdentifier>{6CF96F67-4A36-3915-9AEC-C975F4FB4D66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller">
+      <UniqueIdentifier>{9C05CF1B-A2DE-3D62-8E30-2DD7FC290C55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_2d_displacement">
+      <UniqueIdentifier>{B8975D34-7B20-3624-BFC9-17DCC5F80DFF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_first_person">
+      <UniqueIdentifier>{42E0BF2F-B1DE-36C4-A997-FC7FF9682510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_first_person_euler">
+      <UniqueIdentifier>{B19FF565-21BD-3A13-8005-7D856BD137CD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_fly_mode">
+      <UniqueIdentifier>{FF0E2E17-3F3D-3B5D-A525-D5BC9887D81D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_generic_base">
+      <UniqueIdentifier>{DCC855AC-F450-3881-BA0D-E93DC31AF890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_orbit">
+      <UniqueIdentifier>{CC2506B5-5BB3-3EE5-9703-EF966F3F3F58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_orbit_euler">
+      <UniqueIdentifier>{0A764327-F5B6-3847-B125-D09FEC2F10A2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\test">
+      <UniqueIdentifier>{0A3395A5-2C0E-38A4-8B68-A94FDD76C0AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\20_format_parser">
+      <UniqueIdentifier>{3009DDDA-B481-3B21-88B8-7A8D98A952A8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\20_format_parser\mesh_loader">
+      <UniqueIdentifier>{CF4A94FD-12B5-32C2-BD00-5BD5A72C27E7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\20_format_parser\mesh_loader\obj">
+      <UniqueIdentifier>{068FEED9-A2EF-31AA-A47F-118626017D64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\20_format_parser\mesh_loader\obj_advanced">
+      <UniqueIdentifier>{7B50CFDA-EEB6-35D6-B5CA-AE1212AE9868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\21_scene_project_helper">
+      <UniqueIdentifier>{917AAAD5-F783-367F-B6F8-B2C5E6701B43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\21_scene_project_helper\path">
+      <UniqueIdentifier>{B56A302E-77A8-3F41-86AF-39B480F8AABC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{6449600E-E200-3729-9A3A-10A9B55E66AA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders\mesh">
+      <UniqueIdentifier>{DEFCF390-49BA-3BC2-B93C-23FAA060E18B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders\screen_quad">
+      <UniqueIdentifier>{EA5A7D2D-3B2D-3E3D-81AD-C6D7DA54B11E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders\single_color">
+      <UniqueIdentifier>{7FCFFFAE-82BA-3DCA-9ECB-98871F34B5E6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{79D0781D-E9F4-38CD-BA67-A7CBE75029BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{264732C0-8A30-33BE-92A9-080C6562FAAB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src">
+      <UniqueIdentifier>{EE501EDA-908E-39AB-AB41-C4405AE940EB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad">
+      <UniqueIdentifier>{D9DF3388-08A3-3A80-8698-985A883A768D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad\opengl33">
+      <UniqueIdentifier>{6EEC4DC0-7260-3438-9C99-44B8DD3F8485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad\opengl41">
+      <UniqueIdentifier>{2F1D5C03-A27B-3289-94C2-731B13446A7E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad\opengl43">
+      <UniqueIdentifier>{615A1DAF-F288-33A3-84DB-F91E1E37BE92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad\opengl46">
+      <UniqueIdentifier>{54562ADC-2156-3900-83E1-C7E418C92F74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\imgui">
+      <UniqueIdentifier>{26BB4C2C-B576-34B7-A96D-5BFA1A474259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\jpeg">
+      <UniqueIdentifier>{949102E6-5215-39D1-A0B4-ABC8C8BEEB3F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\lodepng">
+      <UniqueIdentifier>{486C9977-10DC-3F63-97FB-2FABFA8D5834}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\simplexnoise">
+      <UniqueIdentifier>{A08A108D-FDFC-3BF1-B4A3-B8C827F4AEC0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\tinyobj">
+      <UniqueIdentifier>{E99168A7-258F-3888-B8E5-FC890FAD5C1C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

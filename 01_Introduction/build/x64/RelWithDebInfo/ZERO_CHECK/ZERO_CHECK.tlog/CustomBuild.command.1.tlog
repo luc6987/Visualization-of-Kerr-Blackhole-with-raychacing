@@ -1,0 +1,10 @@
+^C:\USERS\GAUTH\CPP_LIBRARY\CSC43043EP_PRACTICE_CODE\VISUALIZATION-OF-KERR-BLACKHOLE-WITH-RAYCHACING-MAIN\01_INTRODUCTION\BUILD\CMAKEFILES\04432F46CAF8EB5A276CDE0B382855AD\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/gauth/Cpp_library/csc43043ep_practice_code/Visualization-of-Kerr-Blackhole-with-raychacing-main/01_Introduction -BC:/Users/gauth/Cpp_library/csc43043ep_practice_code/Visualization-of-Kerr-Blackhole-with-raychacing-main/01_Introduction/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/gauth/Cpp_library/csc43043ep_practice_code/Visualization-of-Kerr-Blackhole-with-raychacing-main/01_Introduction/build/01_Introduction.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
