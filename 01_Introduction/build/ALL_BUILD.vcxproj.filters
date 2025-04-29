@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <CustomBuild Include="C:\Users\gauth\Cpp_library\csc43043ep_practice_code\Visualization-of-Kerr-Blackhole-with-raychacing-main\01_Introduction\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
-</Project>

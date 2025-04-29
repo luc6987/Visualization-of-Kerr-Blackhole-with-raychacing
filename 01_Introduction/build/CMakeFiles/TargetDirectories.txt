@@ -1,3 +1,0 @@
-C:/Users/gauth/Cpp_library/csc43043ep_practice_code/Visualization-of-Kerr-Blackhole-with-raychacing-main/01_Introduction/build/CMakeFiles/01_Introduction.dir
-C:/Users/gauth/Cpp_library/csc43043ep_practice_code/Visualization-of-Kerr-Blackhole-with-raychacing-main/01_Introduction/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/gauth/Cpp_library/csc43043ep_practice_code/Visualization-of-Kerr-Blackhole-with-raychacing-main/01_Introduction/build/CMakeFiles/ZERO_CHECK.dir

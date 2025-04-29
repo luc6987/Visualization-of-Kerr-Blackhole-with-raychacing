@@ -316,7 +316,7 @@ vec3 raytrace(Ray ray) {
     float h2 = dot(h, h);
 
     vec4 accumulated_color = vec4(0.0); // 用 vec4 便于 alpha 衰减混合
-    float alpha = 1;
+    float alpha = 0.9;
 
     if(show_blackhole == 0) {
         return background_color(pos, ray.direction); // 不渲染黑洞
@@ -428,7 +428,7 @@ float Theta(float p_theta){
 
 
 //---------------------------------------------------------------------
-// to see the geodesic is escaping to infinity
+// to see whether the geodesic is escaping to infinity
 
 float signf(float x) {
     return (x > 0.0) ? 1.0 : ((x < 0.0) ? -1.0 : 0.0);
