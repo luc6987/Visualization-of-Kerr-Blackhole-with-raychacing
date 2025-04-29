@@ -30,7 +30,7 @@ struct environment_structure : environment_generic_structure
 	vec3 light = {1,1,1};
 
 	// Additional uniforms that can be attached to the environment if needed (empty by default)
-	uniform_generic_structure uniform_generic;
+	uniform_generic_structure uniform_generic; 
 
 	// The shader used to draw the background
 	background_structure background;

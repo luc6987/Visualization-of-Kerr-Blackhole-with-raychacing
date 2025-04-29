@@ -2,6 +2,10 @@
 
 layout(location = 0) in vec3 position;
 
+// Uniform variables expected to receive from the C++ program
+uniform mat4 model; // Model affine transform matrix associated to the current shape
+uniform mat4 view;  // View matrix (rigid transform) of the camera
+uniform mat4 projection; // Projection (perspective or orthogonal) matrix of the camera
 
 out vec2 uv;  
 

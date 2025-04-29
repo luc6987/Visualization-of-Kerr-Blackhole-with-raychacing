@@ -22,8 +22,8 @@ uniform float background_distance;
 uniform mat4 view;
 uniform sampler2D star_map;         // 从 CPU 设置贴图
 // texture from CPU
-uniform int kerr; // 是否使用 Kerr 黑洞
-uniform int display_accretion_disk;
+uniform int kerr; // 0 : display Schwarzschild / 1 : display Kerr
+uniform int show_accretion_disk;
 
 const float PI = 3.14159265358979323846;
 const float beta = 0.0f; // velocity of camera
@@ -507,6 +507,7 @@ vec3 XYZtoFIDO_vector(vec3 cam_pos, vec3 cam_dir){
     // output: fido_dir in FIDO coordinates
     vec3 fido_dir;
     // convert cam_pos to spherical coordinates
+    float r = cam_pos.x;
     float theta = cam_pos.y;
     float phi   = cam_pos.z;
 
@@ -518,9 +519,9 @@ vec3 XYZtoFIDO_vector(vec3 cam_pos, vec3 cam_dir){
     fido_dir.y = dot(cam_dir, e_theta);
     fido_dir.z = dot(cam_dir, e_phi);
     // convert fido_dir to FIDO coordinates:
-    fido_dir.x=fido_dir.x * (rho(cam_pos.x, cam_pos.y) / sqrt(Delta(cam_pos.x)));
-    fido_dir.y=fido_dir.y * rho(cam_pos.x, cam_pos.y);
-    fido_dir.z=fido_dir.z * (rho(cam_pos.x, cam_pos.y) / sqrt(Delta(cam_pos.x)));
+    fido_dir.x=fido_dir.x / (rho(cam_pos.x, cam_pos.y) / sqrt(Delta(cam_pos.x)));
+    fido_dir.y=fido_dir.y / rho(cam_pos.x, cam_pos.y);
+    fido_dir.z=fido_dir.z / omega_bar(cam_pos.x, cam_pos.y);
     return fido_dir;
 }
 

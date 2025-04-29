@@ -37,6 +37,11 @@ void scene_structure::initialize()
 		project::path + "shaders/screen_quad/screen_quad.frag.glsl"
 	);
 	screen_quad_drawable.shader = screen_shader;
+
+	std::cout << "\nScreen quad shader ID" << std::endl;
+	std::cout << "-----------------------------------------------" << std::endl;
+	std::cout << screen_shader.id << std::endl;
+	std::cout << "-----------------------------------------------\n" << std::endl;
     
 
 	// mesh_drawable tmp;
@@ -50,16 +55,18 @@ void scene_structure::initialize()
 }
 
 void scene_structure::display_frame()
-{   environment.uniform_generic.uniform_int["background_type"] = environment.background.type;
-	environment.uniform_generic.uniform_float["background_scale"] = environment.background.scale;
-	environment.uniform_generic.uniform_float["background_distance"] = environment.background.distance;	
-	environment.uniform_generic.uniform_vec3["cam_pos"] = camera_control.camera_model.position();
-	environment.uniform_generic.uniform_float["fov_y"] = camera_projection.field_of_view * 180.0f / Pi;
-	environment.uniform_generic.uniform_float["aspect_ratio"] = camera_projection.aspect_ratio;
-	environment.uniform_generic.uniform_vec2["resolution"] = {window.width, window.height};
-	environment.uniform_generic.uniform_int["show_blackhole"] = gui.show_blackhole ? 1 : 0;
-	environment.uniform_generic.uniform_int["kerr"] = gui.kerr ? 1 : 0;
-	environment.uniform_generic.uniform_int["show_accretion_disk"] = gui.display_accretion_disk ? 1 : 0;
+{   additional_parameters.uniform_int["background_type"] = environment.background.type;
+	additional_parameters.uniform_float["background_scale"] = environment.background.scale;
+	additional_parameters.uniform_float["background_distance"] = environment.background.distance;	
+	additional_parameters.uniform_vec3["cam_pos"] = camera_control.camera_model.position();
+	additional_parameters.uniform_float["fov_y"] = camera_projection.field_of_view * 180.0f / Pi;
+	additional_parameters.uniform_float["aspect_ratio"] = camera_projection.aspect_ratio;
+	additional_parameters.uniform_vec2["resolution"] = {window.width, window.height};
+	additional_parameters.uniform_int["show_blackhole"] = gui.show_blackhole ? 1 : 0;
+	additional_parameters.uniform_int["kerr"] = gui.kerr ? 1 : 0;
+	additional_parameters.uniform_int["show_accretion_disk"] = gui.display_accretion_disk ? 1 : 0;
+
+
 	// Bind shader and texture
 	// glUseProgram(screen_shader.id);
 
@@ -71,19 +78,15 @@ void scene_structure::display_frame()
 	// }
 
 
-
-
-
-
 	mat4 const& cam_frame = camera_control.camera_model.matrix_frame();
-	environment.uniform_generic.uniform_mat3["cam_orientation"] = mat3(cam_frame);
+	additional_parameters.uniform_mat3["cam_orientation"] = mat3(cam_frame);
 	
 	glDisable(GL_DEPTH_TEST); // 不需要深度测试
 	timer.update();
-	environment.uniform_generic.uniform_float["time"] = timer.t;
+	additional_parameters.uniform_float["time"] = timer.t;
 
 	// 绘制全屏四边形
-	draw(screen_quad_drawable, environment);
+	draw(screen_quad_drawable, environment,1,true,additional_parameters);
 
 	// 可选：坐标轴辅助框
 	if (gui.display_frame)
