@@ -15,13 +15,13 @@ uniform float aspect_ratio;// 宽高比
 uniform vec2 resolution;// 屏幕分辨率
 // screen resolution
 uniform int show_blackhole;
+uniform int white;
 
 uniform int background_type;
 uniform float background_scale;
 uniform float background_distance;
 uniform mat4 view;
-uniform sampler2D star_map;         // 从 CPU 设置贴图
-// texture from CPU
+uniform sampler2D star_map;         // texture from CPU
 uniform int kerr; // 是否使用 Kerr 黑洞
 uniform int display_accretion_disk;
 
@@ -35,9 +35,9 @@ const float a = 1.0f; // Kerr 黑洞的自旋参数
 // Kerr black hole spin parameter
 const float Rs = 1.0f; // 黑洞半径
 // Schwarzschild radius
-const int max_steps = 1000; // raytracing 步数
+const int max_steps = 512; // raytracing 步数
 // raytracing steps
-const float dt = 0.005;// 积分步长
+const float dt = 0.05;// 积分步长
 // integration step
 
 
@@ -133,17 +133,16 @@ vec3 toXYZ(vec3 sphericalCoord){
     float rho = sphericalCoord.x;
     float theta = sphericalCoord.y;
     float phi = sphericalCoord.z;
-
     float x = rho * cos(theta) * sin(phi);
     float y = rho * sin(theta) * sin(phi);
     float z = rho * cos(phi);
-
     return vec3(x, y, z);
 }
 
 vec3 acceleration(float h2, vec3 pos) {
     float r2 = dot(pos, pos);
     float r5 = pow(r2, 2.5);
+    if(white ==1){return 1.5 * h2 * pos / r5;}
     return -1.5 * h2 * pos / r5;
 }
 
@@ -177,26 +176,25 @@ float star_map_uv(vec2 uv) {
 
     float star = step(0.996, s1) * s2;
 
-    return star; // 单通道亮度，可扩展为 RGB 彩色星空
+    return star;
 }
 
 vec3 background_sky_sphere(vec3 x, vec3 direction) {
     float PI = 3.14159265358979323846;
 
-    vec3 dir = normalize(direction); // 使用世界方向坐标
+    vec3 dir = normalize(direction); 
     float u = 0.5 + atan(dir.x, dir.y) / (2.0 * PI);
     float v = acos(-dir.z) / PI;
     vec2 uv = vec2(u, v) * background_scale;
 
-    float star = star_map_uv(uv); // 用你之前写的那套伪随机生成器
+    float star = star_map_uv(uv); 
 
     return vec3(star);
 }
 
 
-
 // vec3 background_sky_sphere(vec3 x, vec3 direction) {
-//     vec3 local_dir = normalize(cam_orientation * direction); // 防止光线方向非单位向量
+//     vec3 local_dir = normalize(cam_orientation * direction); // 防止光线方0非单位向量
 //     vec2 uv = sphericalUV(local_dir);
 //     vec3 color = texture(star_map, uv).rgb;
 //     color = pow(color, vec3(1.0 / 2.2)); // gamma correction
@@ -328,11 +326,15 @@ vec3 raytrace(Ray ray) {
         rk4(pos,  dir,h2, dt);
         
         
-        if (length(pos) < blackhole_radius) {
-        return accumulated_color.rgb; // 完全被吸收，事件视界内不可逃逸
-         }
+        if (length(pos) < blackhole_radius && white == 0) {
+            // 黑洞吸收
+            return accumulated_color.rgb; // 完全被吸收，事件视界内不可逃逸
+        }
 
+        if(display_accretion_disk == 1) {
         diskRender(pos, accumulated_color, alpha, dir);
+        }
+
         
     }
 
@@ -518,9 +520,9 @@ vec3 XYZtoFIDO_vector(vec3 cam_pos, vec3 cam_dir){
     fido_dir.y = dot(cam_dir, e_theta);
     fido_dir.z = dot(cam_dir, e_phi);
     // convert fido_dir to FIDO coordinates:
-    fido_dir.x=fido_dir.x * (rho(cam_pos.x, cam_pos.y) / sqrt(Delta(cam_pos.x)));
-    fido_dir.y=fido_dir.y * rho(cam_pos.x, cam_pos.y);
-    fido_dir.z=fido_dir.z * (rho(cam_pos.x, cam_pos.y) / sqrt(Delta(cam_pos.x)));
+    fido_dir.x=fido_dir.x / (rho(cam_pos.x, cam_pos.y) / sqrt(Delta(cam_pos.x)));
+    fido_dir.y=fido_dir.y / rho(cam_pos.x, cam_pos.y);
+    fido_dir.z=fido_dir.z / omega_bar(cam_pos.x, cam_pos.y);
     return fido_dir;
 }
 
@@ -648,6 +650,7 @@ float f_p_theta(Geodesic g) {
 }
 
 Geodesic RK4_step(Geodesic g, float h) {
+    h=-h;
     // k1
     float k1_r = f_r(g);
     float k1_theta = f_theta(g);
@@ -729,13 +732,14 @@ vec3 background_kerr_grid(float theta, float phi) {
 vec3 raytrace_kerr(Geodesic g) {
     for (int i = 0; i < max_steps; ++i) {
         // 积分一步
-        g = RK4_step(g, dt);
-        }
+        g = RK4_step(g, -dt);
+    }
     if (g.toInfinity == 1) {
         return background_kerr_grid(g.theta, g.phi);
     } else {
-        return vec3(1.0); // 黑洞吞噬
+        return vec3(0.0); // 黑洞吞噬
     }
+
 }
 
 void main() {

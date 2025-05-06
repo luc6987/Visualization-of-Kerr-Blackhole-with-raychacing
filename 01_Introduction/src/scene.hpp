@@ -14,11 +14,12 @@ using cgp::timer_basic;
 // Variables associated to the GUI (buttons, etc)
 struct gui_parameters {
 	bool display_frame = false;
-	bool show_blackhole = false;
-    bool kerr=true;
+	bool show_blackhole = true;
+    bool kerr=false;
     // Ajout de la nouvelle variable display_wireframe ici
     bool display_wireframe = false;
 	bool display_accretion_disk = true;
+	bool white = false;
 };
 
 // The structure of the custom scene

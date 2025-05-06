@@ -59,7 +59,8 @@ void scene_structure::display_frame()
 	environment.uniform_generic.uniform_vec2["resolution"] = {window.width, window.height};
 	environment.uniform_generic.uniform_int["show_blackhole"] = gui.show_blackhole ? 1 : 0;
 	environment.uniform_generic.uniform_int["kerr"] = gui.kerr ? 1 : 0;
-	environment.uniform_generic.uniform_int["show_accretion_disk"] = gui.display_accretion_disk ? 1 : 0;
+	environment.uniform_generic.uniform_int["display_accretion_disk"] = gui.display_accretion_disk ? 1 : 0;
+	environment.uniform_generic.uniform_int["white"] = gui.white ? 1 : 0;
 	// Bind shader and texture
 	// glUseProgram(screen_shader.id);
 
@@ -102,8 +103,12 @@ void scene_structure::display_gui()
 	ImGui::Checkbox("Accretion disk", &gui.display_accretion_disk);
 	ImGui::Checkbox("Show black hole", &gui.show_blackhole);
 	ImGui::Checkbox("Frame", &gui.display_frame);
+	ImGui::Checkbox("white", &gui.white);
 	ImGui::SliderFloat("field of view", &camera_projection.field_of_view, 0.0f, 5.0f);
 	ImGui::Text("Cam pos: (%.2f, %.2f, %.2f)", cam_position.x, cam_position.y, cam_position.z);
+	vec3 cam_dir=normalize(-inverse(camera_control.camera_model.matrix_view())[2].xyz());
+	ImGui::Text("Cam orientation: (%.2f, %.2f, %.2f)",cam_dir.x, cam_dir.y, cam_dir.z);
+	
 	
 }
 

@@ -7,7 +7,7 @@ float project::gui_scale = 1.0f;
 // Is FPS limited automatically
 bool project::fps_limiting = true;
 // Maximal default FPS (used only of fps_max is true)
-float project::fps_max=3.0f;
+float project::fps_max=5.0f;
 // Automatic synchronization of GLFW with the vertical-monitor refresh
 bool project::vsync=true;     
 // Initial dimension of the OpenGL window (ratio if in [0,1], and absolute pixel size if > 1)

@@ -19,7 +19,7 @@ def run_cmd(cmd):
 
 run_cmd('python3 scripts/linux_clean.py')
 
-run_cmd('mkdir build/')
+run_cmd('mkdir -p build/')
 run_cmd('cd build/; cmake ..')
 run_cmd('cd build/; make -j'+str(multiprocessing.cpu_count()))
 
