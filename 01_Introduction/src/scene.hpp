@@ -34,6 +34,7 @@ struct scene_structure : cgp::scene_inputs_generic {
 
 	mesh_drawable global_frame;          // The standard global frame
 	environment_structure environment;   // Standard environment controler
+	uniform_generic_structure additional_parameters; //Additional uniform paramteters 
 	input_devices inputs;                // Storage for inputs status (mouse, keyboard, window dimension)
 	gui_parameters gui;                  // Standard GUI element storage
 	GLuint star_texture_id;

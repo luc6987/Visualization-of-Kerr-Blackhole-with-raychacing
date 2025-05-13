@@ -22,7 +22,7 @@ uniform float background_scale;
 uniform float background_distance;
 uniform mat4 view;
 uniform sampler2D star_map;         // texture from CPU
-uniform int kerr; // 是否使用 Kerr 黑洞
+uniform int kerr; // 0 : display Schwarzschild / 1 : display Kerr
 uniform int display_accretion_disk;
 
 const float PI = 3.14159265358979323846;
@@ -509,6 +509,7 @@ vec3 XYZtoFIDO_vector(vec3 cam_pos, vec3 cam_dir){
     // output: fido_dir in FIDO coordinates
     vec3 fido_dir;
     // convert cam_pos to spherical coordinates
+    float r = cam_pos.x;
     float theta = cam_pos.y;
     float phi   = cam_pos.z;
 

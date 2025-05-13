@@ -37,6 +37,11 @@ void scene_structure::initialize()
 		project::path + "shaders/screen_quad/screen_quad.frag.glsl"
 	);
 	screen_quad_drawable.shader = screen_shader;
+
+	std::cout << "\nScreen quad shader ID" << std::endl;
+	std::cout << "-----------------------------------------------" << std::endl;
+	std::cout << screen_shader.id << std::endl;
+	std::cout << "-----------------------------------------------\n" << std::endl;
     
 
 	// mesh_drawable tmp;
@@ -72,19 +77,15 @@ void scene_structure::display_frame()
 	// }
 
 
-
-
-
-
 	mat4 const& cam_frame = camera_control.camera_model.matrix_frame();
-	environment.uniform_generic.uniform_mat3["cam_orientation"] = mat3(cam_frame);
+	additional_parameters.uniform_mat3["cam_orientation"] = mat3(cam_frame);
 	
 	glDisable(GL_DEPTH_TEST); // 不需要深度测试
 	timer.update();
-	environment.uniform_generic.uniform_float["time"] = timer.t;
+	additional_parameters.uniform_float["time"] = timer.t;
 
 	// 绘制全屏四边形
-	draw(screen_quad_drawable, environment);
+	draw(screen_quad_drawable, environment,1,true,additional_parameters);
 
 	// 可选：坐标轴辅助框
 	if (gui.display_frame)
