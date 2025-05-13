@@ -9,7 +9,7 @@ using namespace cgp;
 // ********************************************************************* //
 
 struct background_structure {
-    int type = 0;                // 0: checkerboard, 1: gradient, 2: stars
+    int type = 2;                // 0: checkerboard, 1: gradient, 2: stars
     float scale = 2.0f;          // 棋盘格缩放因子
     float distance = 10.0f;      // 背景屏幕 z = -distance
 };

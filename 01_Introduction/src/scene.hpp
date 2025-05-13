@@ -20,6 +20,10 @@ struct gui_parameters {
     bool display_wireframe = false;
 	bool display_accretion_disk = true;
 	bool white = false;
+	bool red_shift = false;
+	bool doppler = false;
+	bool temperature_realistic = false;
+	float accretionTemp=10000.0f;
 };
 
 // The structure of the custom scene

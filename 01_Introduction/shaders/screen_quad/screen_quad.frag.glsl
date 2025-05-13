@@ -24,6 +24,10 @@ uniform mat4 view;
 uniform sampler2D star_map;         // texture from CPU
 uniform int kerr; // 0 : display Schwarzschild / 1 : display Kerr
 uniform int display_accretion_disk;
+uniform int red_shift;
+uniform int dopper;
+uniform float accretionTemp;
+uniform int temperature_realistic;
 
 const float PI = 3.14159265358979323846;
 const float beta = 0.0f; // velocity of camera
@@ -232,6 +236,75 @@ vec3 background_color(vec3 x, vec3 direction) {
         return background_plane(x, direction);
 }
 
+vec4 getBlackBodyColor(float temp)
+{
+    temp = clamp(temp, 1000.0, 12000.0);
+    float t = (temp - 1000.0) / (12000.0 - 1000.0); // Normalize to [0,1]
+
+    // Smooth color gradient from red to blue-white
+    float r = smoothstep(0.0, 0.4, t) * (1.0 - smoothstep(0.8, 1.0, t));
+    float g = smoothstep(0.2, 0.8, t);
+    float b = smoothstep(0.6, 1.0, t);
+
+    // Optional: emphasize brightness based on temperature
+    float brightness = pow(t, 0.5) * 1.2; // boost overall intensity
+
+    vec3 color = brightness * vec3(r, g, b);
+    return vec4(clamp(color, 0.0, 1.0), 1.0);
+}
+
+
+
+float calculateRedShift(vec3 pos)
+{
+    float dist = sqrt(dot(pos, pos));
+    if (dist < 1.0f)
+    {
+        return 0.0f;
+    }
+    float redshift = sqrt(1.0f - 1.0f/dist) - 1.0f;
+
+    redshift = (1 / (1.0 + redshift));
+    return redshift;
+}
+
+float calculateDopplerEffect(vec3 pos, vec3 viewDir)
+{
+    vec3 vel;
+    float r = length(pos);
+    if (r < 1.0)
+    {
+        vel = vec3(0.0f);
+        return 1.0f;
+    }
+
+    float velMag;
+    if (display_accretion_disk == 0)
+    {
+        velMag = -sqrt((G * M / r));    //non relativistic speed
+    }
+    else if (display_accretion_disk == 1)
+    {
+        velMag = -sqrt((G * M / r) * (1.0 - 3.0 * G * M / (r * c * c)));    //relativistic speed
+    }
+
+    vec3 velDir = normalize(cross(vec3(0.0, 1.0, 0.0), pos));
+    vel = velDir * velMag;
+
+    vec3 beta_s = vel / c;
+
+    float gamma = 1.0 / sqrt(1.0 - dot(beta_s, beta_s));
+    float dopplerShift = gamma * (1.0 + dot(vel, normalize(viewDir)));
+
+    return dopplerShift;
+}
+
+float calculateRealisticTemperature(vec3 pos, float baseTemp) {
+    float radius = length(pos);
+    return baseTemp * pow(radius, -0.75);
+}
+
+
 void diskRender(vec3 pos, inout vec4 color, inout float alpha, vec3 viewDir){
     float diskHeight = 0.3;
     float diskDensityV = 1.0;
@@ -265,7 +338,7 @@ void diskRender(vec3 pos, inout vec4 color, inout float alpha, vec3 viewDir){
     sphericalCoord.z *= 4.0;
 
     density *= 1.0 / pow(sphericalCoord.x, diskDensityH);
-    density *= 1600.0;
+    density *= 16000.0;
 
     float noise = 1.0;
     for (int i = 0; i < diskNoiseLOD; ++i){
@@ -277,29 +350,30 @@ void diskRender(vec3 pos, inout vec4 color, inout float alpha, vec3 viewDir){
         }
     }
 
-    // float redshift = calculateRedShift(pos);
-    // float doppler = calculateDopplerEffect(pos, viewDir);
+    float redshift = calculateRedShift(pos);
+    float doppler = calculateDopplerEffect(pos, viewDir);
 
-    // float accretionTempMod = accretionTemp;
+    float accretionTempMod = accretionTemp;
 
-    // if (realisticTemperature)
-    //     accretionTempMod = calculateRealisticTemperature(pos, accretionTempMod);
+    if (temperature_realistic==1){
+        accretionTempMod = calculateRealisticTemperature(pos, accretionTempMod);}
 
-    // if(dopplerShift)
-    //     accretionTempMod /= doppler;
+    if(doppler == 1){
+        accretionTempMod /= doppler;}
 
-    // if (gravitationalRedShift)
-    //     accretionTempMod /= redshift;
+    if(red_shift==1){
+       accretionTempMod /= redshift;}
 
-    //vec4 dustColor = getBlackBodyColor(accretionTempMod *  redshift) * 0.5;
+    
+    vec4 dustColor = getBlackBodyColor(accretionTempMod *  redshift) * 0.5;
 
-    color += density * alpha * abs(noise);// * dustColor
+    color += density * alpha * abs(noise) * dustColor;
 
-    // if (gravitationalRedShift)
-    //     color /= redshift;
+    if(red_shift==1){
+         color /= redshift;}
 
-    // if (beaming)
-    //     color /= doppler * doppler * doppler;
+    if(doppler == 1){ 
+         color /= doppler * doppler * doppler;}
 }
 
 vec3 raytrace(Ray ray) {

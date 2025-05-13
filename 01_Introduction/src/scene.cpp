@@ -10,7 +10,7 @@ void scene_structure::initialize()
 	camera_control.initialize(inputs, window); 
 	camera_control.set_rotation_axis_z();
 	camera_control.look_at(
-    { 0.0f, 15.0f, 0.0f }, // 摄像机位置
+    { 0.0f, -2.0f, -15.0f }, // 摄像机位置
 	{ 0.0f,  0.0f, 0.0f }, // 观察点
 	{ 0.0f,  0.0f, 1.0f }  // 上方向
 	);
@@ -74,6 +74,11 @@ void scene_structure::display_frame()
 	environment.uniform_generic.uniform_int["kerr"] = gui.kerr ? 1 : 0;
 	environment.uniform_generic.uniform_int["display_accretion_disk"] = gui.display_accretion_disk ? 1 : 0;
 	environment.uniform_generic.uniform_int["white"] = gui.white ? 1 : 0;
+	environment.uniform_generic.uniform_int["red_shift"] = gui.red_shift ? 1 : 0;
+	environment.uniform_generic.uniform_int["dopple"] = gui.doppler ? 1 : 0;
+	environment.uniform_generic.uniform_int["temperature_realistic"] = gui.temperature_realistic ? 1 : 0;
+	environment.uniform_generic.uniform_float["accretionTemp"] = gui.accretionTemp;
+	
 	// Bind shader and texture
 	// glUseProgram(screen_shader.id);
 
@@ -113,11 +118,15 @@ void scene_structure::display_gui()
 	ImGui::Checkbox("Show black hole", &gui.show_blackhole);
 	ImGui::Checkbox("Frame", &gui.display_frame);
 	ImGui::Checkbox("white", &gui.white);
+	ImGui::Checkbox("red shift", &gui.red_shift);
+	ImGui::Checkbox("doppler", &gui.doppler);
+	ImGui::Checkbox("temperature realistic", &gui.temperature_realistic);
 	ImGui::SliderFloat("field of view", &camera_projection.field_of_view, 0.0f, 5.0f);
+	ImGui::SliderFloat("accretion disk temperature", &gui.accretionTemp, 1000.0f, 40000.0f);
 	ImGui::Text("Cam pos: (%.2f, %.2f, %.2f)", cam_position.x, cam_position.y, cam_position.z);
 	vec3 cam_dir=normalize(-inverse(camera_control.camera_model.matrix_view())[2].xyz());
 	ImGui::Text("Cam orientation: (%.2f, %.2f, %.2f)",cam_dir.x, cam_dir.y, cam_dir.z);
-	
+
 	
 }
 
