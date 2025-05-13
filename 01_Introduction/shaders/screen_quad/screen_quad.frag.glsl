@@ -659,58 +659,72 @@ Geodesic RK4_step(Geodesic g, float h) {
     float k1_p_r = f_p_r(g);
     float k1_p_theta = f_p_theta(g);
 
-    // k2
-    Geodesic g2 = g;
-    g2.r += 0.5 * h * k1_r;
-    g2.theta += 0.5 * h * k1_theta;
-    g2.phi += 0.5 * h * k1_phi;
-    g2.p_r += 0.5 * h * k1_p_r;
-    g2.p_theta += 0.5 * h * k1_p_theta;
+    // --- k2 状态 ---
+    Geodesic gk2;
+    gk2.r = g.r + 0.5 * h * k1_r;
+    gk2.theta = g.theta + 0.5 * h * k1_theta;
+    gk2.phi = g.phi + 0.5 * h * k1_phi;
+    gk2.p_r = g.p_r + 0.5 * h * k1_p_r;
+    gk2.p_theta = g.p_theta + 0.5 * h * k1_p_theta;
 
-    float k2_r = f_r(g2);
-    float k2_theta = f_theta(g2);
-    float k2_phi = f_phi(g2);
-    float k2_p_r = f_p_r(g2);
-    float k2_p_theta = f_p_theta(g2);
 
-    // k3
-    g2 = g;
-    g2.r += 0.5 * h * k2_r;
-    g2.theta += 0.5 * h * k2_theta;
-    g2.phi += 0.5 * h * k2_phi;
-    g2.p_r += 0.5 * h * k2_p_r;
-    g2.p_theta += 0.5 * h * k2_p_theta;
+    float k2_r = f_r(gk2);
+    float k2_theta = f_theta(gk2);
+    float k2_phi = f_phi(gk2);
+    float k2_p_r = f_p_r(gk2);
+    float k2_p_theta = f_p_theta(gk2);
 
-    float k3_r = f_r(g2);
-    float k3_theta = f_theta(g2);
-    float k3_phi = f_phi(g2);
-    float k3_p_r = f_p_r(g2);
-    float k3_p_theta = f_p_theta(g2);
+    // --- k3 状态 ---
+    Geodesic gk3;
+    gk3.r = g.r + 0.5 * h * k2_r;
+    gk3.theta = g.theta + 0.5 * h * k2_theta;
+    gk3.phi = g.phi + 0.5 * h * k2_phi;
+    gk3.p_r = g.p_r + 0.5 * h * k2_p_r;
+    gk3.p_theta = g.p_theta + 0.5 * h * k2_p_theta;
 
-    // k4
-    g2 = g;
-    g2.r += h * k3_r;
-    g2.theta += h * k3_theta;
-    g2.phi += h * k3_phi;
-    g2.p_r += h * k3_p_r;
-    g2.p_theta += h * k3_p_theta;
 
-    float k4_r = f_r(g2);
-    float k4_theta = f_theta(g2);
-    float k4_phi = f_phi(g2);
-    float k4_p_r = f_p_r(g2);
-    float k4_p_theta = f_p_theta(g2);
+    float k3_r = f_r(gk3);
+    float k3_theta = f_theta(gk3);
+    float k3_phi = f_phi(gk3);
+    float k3_p_r = f_p_r(gk3);
+    float k3_p_theta = f_p_theta(gk3);
 
-    // 更新值
-    Geodesic g_new = g;
-    g_new.r += (h / 6.0) * (k1_r + 2.0 * k2_r + 2.0 * k3_r + k4_r);
-    g_new.theta += (h / 6.0) * (k1_theta + 2.0 * k2_theta + 2.0 * k3_theta + k4_theta);
-    g_new.phi += (h / 6.0) * (k1_phi + 2.0 * k2_phi + 2.0 * k3_phi + k4_phi);
-    g_new.p_r += (h / 6.0) * (k1_p_r + 2.0 * k2_p_r + 2.0 * k3_p_r + k4_p_r);
-    g_new.p_theta += (h / 6.0) * (k1_p_theta + 2.0 * k2_p_theta + 2.0 * k3_p_theta + k4_p_theta);
+    // --- k4 状态 ---
+    Geodesic gk4;
+    gk4.r = g.r + h * k3_r;
+    gk4.theta = g.theta + h * k3_theta;
+    gk4.phi = g.phi + h * k3_phi;
+    gk4.p_r = g.p_r + h * k3_p_r;
+    gk4.p_theta = g.p_theta + h * k3_p_theta;
+ 
+
+    float k4_r = f_r(gk4);
+    float k4_theta = f_theta(gk4);
+    float k4_phi = f_phi(gk4);
+    float k4_p_r = f_p_r(gk4);
+    float k4_p_theta = f_p_theta(gk4);
+
+    // --- 更新 geodesic ---
+    Geodesic g_new;
+    g_new.r = g.r + (h / 6.0) * (k1_r + 2.0 * k2_r + 2.0 * k3_r + k4_r);
+    g_new.theta = g.theta + (h / 6.0) * (k1_theta + 2.0 * k2_theta + 2.0 * k3_theta + k4_theta);
+    g_new.phi = g.phi + (h / 6.0) * (k1_phi + 2.0 * k2_phi + 2.0 * k3_phi + k4_phi);
+    g_new.p_r = g.p_r + (h / 6.0) * (k1_p_r + 2.0 * k2_p_r + 2.0 * k3_p_r + k4_p_r);
+    g_new.p_theta = g.p_theta + (h / 6.0) * (k1_p_theta + 2.0 * k2_p_theta + 2.0 * k3_p_theta + k4_p_theta);
+
+
+    // --- 角度归一化 ---
+    // theta 限制 [0, pi]
+    if (g_new.theta < 0.0) g_new.theta = -g_new.theta;
+    if (g_new.theta > 3.14159265359) g_new.theta = 3.14159265359 - (g_new.theta - 3.14159265359);
+
+    // phi 限制 [0, 2pi]
+    float two_pi = 6.28318530718;
+    g_new.phi = mod(g_new.phi, two_pi);  // GLSL 中 mod(a,b) = a - b * floor(a/b)
 
     return g_new;
 }
+
 
 //----------------------------------------------------------
 
@@ -733,8 +747,8 @@ vec3 background_kerr_grid(float theta, float phi) {
 vec3 raytrace_kerr(Geodesic g) {
     for (int i = 0; i < max_steps; ++i) {
         // 积分一步
-        g = RK4_step(g, -dt);
-    }
+        g = RK4_step(g, dt);
+        }
     if (g.toInfinity == 1) {
         return background_kerr_grid(g.theta, g.phi);
     } else {

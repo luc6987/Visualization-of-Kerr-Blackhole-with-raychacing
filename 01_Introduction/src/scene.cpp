@@ -32,10 +32,18 @@ void scene_structure::initialize()
 	screen_quad_drawable.initialize_data_on_gpu(screen_quad);
 
 	// 加载自定义光线追踪着色器
-	screen_shader.load(
-		project::path + "shaders/screen_quad/screen_quad.vert.glsl",
-		project::path + "shaders/screen_quad/screen_quad.frag.glsl"
-	);
+	if (gui.kerr) {
+		screen_shader.load(
+			project::path + "shaders/Kerr/screen_quad.vert.glsl",
+			project::path + "shaders/Kerr/screen_quad.frag.glsl"
+		);
+	} else {
+		screen_shader.load(
+			project::path + "shaders/screen_quad/screen_quad.vert.glsl",
+			project::path + "shaders/screen_quad/screen_quad.frag.glsl"
+		);
+	}
+
 	screen_quad_drawable.shader = screen_shader;
 
 	std::cout << "\nScreen quad shader ID" << std::endl;
