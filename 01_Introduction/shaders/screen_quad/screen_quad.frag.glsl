@@ -44,6 +44,10 @@ const int max_steps = 512; // raytracing 步数
 const float dt = 0.05;// 积分步长
 // integration step
 
+const float Rp = 5.0f; // the radius of the revolution of the planet
+const float rp = 0.5f; // the radius of the rotation of the planet
+const vec3 planet_color = vec3(0.63, 0.8, 0.13); // planet color
+const float av = 0.1f; // the rotation speed of the planet
 
 struct Ray {
     vec3 origin; // 光线起点
@@ -370,7 +374,7 @@ void diskRender(vec3 pos, inout vec4 color, inout float alpha, vec3 viewDir){
     color += density * alpha * abs(noise) * dustColor;
 
     if(red_shift==1){
-         color /= redshift;}
+        color /= redshift;}
 
     if(doppler == 1){ 
          color /= doppler * doppler * doppler;}
@@ -380,6 +384,8 @@ vec3 raytrace(Ray ray) {
     const int max_steps = 512;
     const float dt = 0.05;
     const float blackhole_radius = Rs;
+
+    float t = time;
 
     vec3 pos = ray.origin;
     vec3 dir = ray.direction;
@@ -409,6 +415,14 @@ vec3 raytrace(Ray ray) {
         diskRender(pos, accumulated_color, alpha, dir);
         }
 
+        // the planet
+        t-=dt;
+        vec3 planet_pos = vec3(Rp * cos(av * t), 0.0, Rp * sin(av * t));
+        if(length(pos-planet_pos) < rp) {
+            float planet_alpha = 1.0;
+            vec4 pc=accumulated_color + vec4(planet_color, planet_alpha);
+            return pc.rgb;
+        }
         
     }
 
@@ -884,8 +898,6 @@ void main() {
             ray.direction = ray_dir_world;
             color = raytrace(ray);
         }
-
-  
 
     frag_color = vec4(color, 1.0);
 }
