@@ -13,38 +13,38 @@ using cgp::timer_basic;
 
 // Variables associated to the GUI (buttons, etc)
 struct gui_parameters {
-	bool display_frame = false;
-	int raytracing_step = 512;
-	float raytracing_step_size = 0.05f;
-	bool display_wireframe = false;
-	bool realistic_raytracing=false;
+	bool display_frame = false;// Display the global frame
+	int raytracing_step = 512;// Number of steps for the raytracing
+	float raytracing_step_size = 0.05f;// Step size for the raytracing
+	int integrator = 0;// Integrator used for the raytracing 0: RK4, 1: Verlet, 2: symplectic Euler
+	bool realistic_raytracing=false;// Use the realistic raytracing
 };
 
 struct BlackHole {
-	bool show_blackhole = true;
-	bool white = false;
+	bool show_blackhole = true;// Display the black hole
+	bool white = false;// Display the white hole
 	float a = 0.0f; // Kerr parameter
 };
 
 struct accretion_disk_parameters {
-	bool display_accretion_disk = true;
-	bool red_shift = true;
-	bool doppler = true;
-	bool temperature_realistic = true;
-	float accretionTemp=20000.0f;
+	bool display_accretion_disk = true;// Display the accretion disk
+	bool red_shift = true;// Display the red shift
+	bool doppler = true;// Display the Doppler effect
+	bool temperature_realistic = true;// Use realistic temperature
+	float accretionTemp=20000.0f;// Accretion disk temperature
 };
 
 struct planet_parameters {
 	// keppler's six parameters to define the planet orbit
-	bool display_planet = true;
-	float demi_grand_axe = 3.0f;
-	float eccentricity = 0.0f;
-	float inclination = 0.0f;
-	float longtitude_du_noeud_ascendant = 0.0f;
-	float argument_du_periapside = 0.0f;
-	float mean_anomaly = 0.0f;
+	bool display_planet = true;// Display the planet
+	float demi_grand_axe = 3.0f;// semi-major axis
+	float eccentricity = 0.0f;// Eccentricity
+	float inclination = 0.0f;// Inclination
+	float longtitude_du_noeud_ascendant = 0.0f;// Longitude of the ascending node
+	float argument_du_periapside = 0.0f;// Argument of periapsis
+	float mean_anomaly = 0.0f;// Mean anomaly
 	float rp = 0.5f; // planet radius
-	vec3 planet_color = vec3(0.63, 0.8, 0.13);
+	vec3 planet_color = vec3(0.63, 0.8, 0.13);// Planet color
 };
 
 // The structure of the custom scene

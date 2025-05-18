@@ -44,6 +44,7 @@ uniform vec3 planet_color;
 // parametre of numerical integration
 uniform int max_steps;
 uniform float dt;
+uniform int integrator;  //0: RK4, 1: Verlet, 2: symplectic Euler
 
 // Physics constants
 const float PI = 3.14159265358979323846;
@@ -178,6 +179,20 @@ void rk4(inout vec3 x, inout vec3 v, float h2, float dt) {
     v += dt * (k1_v + 2.0 * k2_v + 2.0 * k3_v + k4_v) / 6.0;
 }
 
+void verlet(inout vec3 x, inout vec3 v, float h2, float dt) {
+    vec3 a0 = acceleration(h2, x, v);
+
+    x += v * dt + 0.5 * a0 * dt * dt;
+
+    vec3 a1 = acceleration(h2, x, v); // 重新计算新位置的加速度（v 还没变）
+
+    v += 0.5 * (a0 + a1) * dt;
+}
+
+void symplectic_euler(inout vec3 x, inout vec3 v, float h2, float dt) {
+    v += dt * acceleration(h2, x, v); // 先更新动量
+    x += dt * v;                      // 再更新位置（用新 v）
+}
 
 float star_map_uv(vec2 uv) {
     // the star map is a 2D texture, so we need to convert the UV coordinates to 0-1 range
@@ -473,7 +488,13 @@ vec3 raytrace(Ray ray) {
             }
             else{
                 // if the black hole is shown, the ray propagates in a curved path
-                rk4(pos,  dir,h2, dt);
+                if(integrator == 0)
+                    rk4(pos, dir, h2, dt);
+                else if(integrator == 1)
+                    verlet(pos, dir, h2, dt);
+                else
+                    symplectic_euler(pos, dir, h2, dt);
+
             }
 
         if (length(pos) < 1.0 && white == 0 && show_blackhole == 1) {

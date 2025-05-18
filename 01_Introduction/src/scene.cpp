@@ -6,23 +6,22 @@ void scene_structure::initialize()
 {
 	std::cout << "Start function scene_structure::initialize()" << std::endl;
 
-	// 摄像机初始化
+	// initialize the window
 	camera_control.initialize(inputs, window); 
 	camera_control.set_rotation_axis_z();
 	camera_control.look_at(
-    { 0.0f, 2.0f, 15.0f }, // 摄像机位置
-	{ 0.0f,  0.0f, 0.0f }, // 观察点
-	{ 0.0f,  0.0f, 1.0f }  // 上方向
+    { 0.0f, 2.0f, 15.0f }, // camera position
+	{ 0.0f,  0.0f, 0.0f }, // target point
+	{ 0.0f,  0.0f, 1.0f }  // up direction
 	);
 	
-	
-	// 显示帮助信息
+	// initialize the projection
 	display_info();
 
-	// 创建辅助坐标系
+	// initialize the environment
 	global_frame.initialize_data_on_gpu(mesh_primitive_frame());
 
-	// 创建固定在屏幕上的全屏四边形（NDC [-1,1]）
+	// create a quad to display the shader
 	mesh screen_quad = mesh_primitive_quadrangle(
 		{-1.0f, -1.0f, 0.0f},
 		{ 1.0f, -1.0f, 0.0f},
@@ -31,7 +30,7 @@ void scene_structure::initialize()
 	);
 	screen_quad_drawable.initialize_data_on_gpu(screen_quad);
 
-	// 加载自定义光线追踪着色器
+	// load custom ray tracing shader
 	if (gui.realistic_raytracing) {
 		screen_shader.load(
 			project::path + "shaders/Kerr/screen_quad.vert.glsl",
@@ -51,21 +50,13 @@ void scene_structure::initialize()
 	std::cout << screen_shader.id << std::endl;
 	std::cout << "-----------------------------------------------\n" << std::endl;
     
-
-	// mesh_drawable tmp;
-	// tmp.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/starmap_g16k.jpg",
-	// 	GL_REPEAT, GL_CLAMP_TO_EDGE);
-	// star_texture_id = tmp.texture.id;
-
-	
-
 	std::cout << "End function scene_structure::initialize()" << std::endl;
 }
 
-// 显示和传递所有uniform参数到shader，并绘制全屏四边形
+// This function is called to display the frame
 void scene_structure::display_frame()
 {
-	// 1. 设置环境相关uniform
+	// 1. setup the environment
 	environment.uniform_generic.uniform_int["background_type"] = environment.background.type;
 	environment.uniform_generic.uniform_float["background_scale"] = environment.background.scale;
 	environment.uniform_generic.uniform_float["background_distance"] = environment.background.distance;
@@ -75,23 +66,24 @@ void scene_structure::display_frame()
 	environment.uniform_generic.uniform_vec2["resolution"] = {window.width, window.height};
 		environment.uniform_generic.uniform_int["realistic_raytracing"] = gui.realistic_raytracing ? 1 : 0;
 
-	// 2. 设置黑洞相关uniform
+	// 2. setup the black hole related uniforms
 	environment.uniform_generic.uniform_int["show_blackhole"] = blackhole.show_blackhole ? 1 : 0;
 	environment.uniform_generic.uniform_int["white"] = blackhole.white ? 1 : 0;
 	environment.uniform_generic.uniform_float["a"] = blackhole.a;
 
-	// 3. 设置光线追踪相关uniform
+	// 3. setup the ray tracing related uniforms
+	environment.uniform_generic.uniform_int["integrator"] = gui.integrator;
 	environment.uniform_generic.uniform_int["max_steps"] = gui.raytracing_step;
 	environment.uniform_generic.uniform_float["dt"] = gui.raytracing_step_size;
 
-	// 4. 设置吸积盘相关uniform
+	// 4. setup the accretion disk related uniforms
 	environment.uniform_generic.uniform_int["display_accretion_disk"] = accretion_disk_parameters.display_accretion_disk ? 1 : 0;
 	environment.uniform_generic.uniform_int["red_shift"] = accretion_disk_parameters.red_shift ? 1 : 0;
 	environment.uniform_generic.uniform_int["doppler"] = accretion_disk_parameters.doppler ? 1 : 0;
 	environment.uniform_generic.uniform_int["temperature_realistic"] = accretion_disk_parameters.temperature_realistic ? 1 : 0;
 	environment.uniform_generic.uniform_float["accretionTemp"] = accretion_disk_parameters.accretionTemp;
 
-	// 5. 设置行星相关uniform
+	// 5. setup the planet related uniforms
 	environment.uniform_generic.uniform_int["display_planet"] = planet.display_planet ? 1 : 0;
 	environment.uniform_generic.uniform_float["demi_grand_axe"] = planet.demi_grand_axe;
 	environment.uniform_generic.uniform_float["eccentricity"] = planet.eccentricity;
@@ -102,19 +94,19 @@ void scene_structure::display_frame()
 	environment.uniform_generic.uniform_float["rp"] = planet.rp;
 	environment.uniform_generic.uniform_vec3["planet_color"] = planet.planet_color;
 
-	// 6. 相机朝向矩阵传递
+	// 6. setup the camera orientation matrix
 	mat4 const& cam_frame = camera_control.camera_model.matrix_frame();
 	additional_parameters.uniform_mat3["cam_orientation"] = mat3(cam_frame);
 
-	// 7. 时间参数
-	glDisable(GL_DEPTH_TEST); // 不需要深度测试
+	// 7. setup the time parameter
+	glDisable(GL_DEPTH_TEST); 
 	timer.update();
 	additional_parameters.uniform_float["time"] = timer.t;
 
-	// 8. 绘制全屏四边形
+	// 8. draw the screen quad
 	draw(screen_quad_drawable, environment, 1, true, additional_parameters);
-
-	// 9. 可选：绘制辅助坐标系
+	
+	// 9. draw the global frame
 	if (gui.display_frame)
 		draw(global_frame, environment);
 }
@@ -136,7 +128,7 @@ void scene_structure::display_gui()
 	ImGui::SliderInt("Raytracing step", &gui.raytracing_step, 1, 1000);
 	ImGui::SliderFloat("Raytracing step size", &gui.raytracing_step_size, 0.001f, 0.1f);
 	ImGui::SliderFloat("field of view", &camera_projection.field_of_view, 0.0f, 5.0f);
-	
+	ImGui::Combo("Integrator", &gui.integrator, "RK4\0Verlet\0Symplectic Euler\0");
 
 	//parametre for the black hole
 	ImGui::Checkbox("Show black hole", &blackhole.show_blackhole);
