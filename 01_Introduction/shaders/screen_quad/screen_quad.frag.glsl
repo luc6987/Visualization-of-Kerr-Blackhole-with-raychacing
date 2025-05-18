@@ -1,57 +1,57 @@
 #version 330 core
 
 
-in vec2 uv;// 传入的纹理坐标 
-//the texture coordinates passed in
-out vec4 frag_color;// 输出颜色
-// output color
 
-uniform float time;// 时间 
-// time
-uniform float fov_y;// 视场角
-// the field of view
-uniform float aspect_ratio;// 宽高比
-// aspect ratio
-uniform vec2 resolution;// 屏幕分辨率
-// screen resolution
-uniform int show_blackhole;
-uniform int white;
+in vec2 uv;//the texture coordinates passed in
+out vec4 frag_color;// output color
 
+// parameters for environment and camera
+uniform float time;// time
+uniform float fov_y;// the field of view
+uniform float aspect_ratio;// aspect ratio
+uniform vec2 resolution;// screen resolution
 uniform int background_type;
 uniform float background_scale;
 uniform float background_distance;
 uniform mat4 view;
-uniform sampler2D star_map;         // texture from CPU
-uniform int kerr; // 0 : display Schwarzschild / 1 : display Kerr
+const float beta = 0.0f; // velocity of camera
+uniform int realistic_raytracing; 
+
+// parameters for black hole
+uniform int show_blackhole;
+uniform int white;
+uniform float a; // Kerr black hole spin parameter
+
+
+// parameters for accretion disk
 uniform int display_accretion_disk;
 uniform int red_shift;
 uniform int dopper;
 uniform float accretionTemp;
 uniform int temperature_realistic;
 
+// parameters of planet
+uniform int display_planet;
+uniform float demi_grand_axe;
+uniform float eccentricity;
+uniform float inclination;
+uniform float longtitude_du_noeud_ascendant;
+uniform float argument_du_periapside;
+uniform float mean_anomaly;
+uniform float rp;
+uniform vec3 planet_color;
+
+// parametre of numerical integration
+uniform int max_steps;
+uniform float dt;
+
+// Physics constants
 const float PI = 3.14159265358979323846;
-const float beta = 0.0f; // velocity of camera
-const float G = 1.0;
-const float M = 1.0;
-const float c = 1.0;
-
-const float a = 1.0f; // Kerr 黑洞的自旋参数
-// Kerr black hole spin parameter
-const float Rs = 1.0f; // 黑洞半径
-// Schwarzschild radius
-const int max_steps = 512; // raytracing 步数
-// raytracing steps
-const float dt = 0.05;// 积分步长
-// integration step
-
-const float Rp = 5.0f; // the radius of the revolution of the planet
-const float rp = 1.5f; // the radius of the rotation of the planet
-const vec3 planet_color = vec3(0.63, 0.8, 0.13); // planet color
-const float av = 0.1f; // the rotation speed of the planet
+// we use nature units G=c=M=1, thus the radius of the blackhole = 1
 
 struct Ray {
-    vec3 origin; // 光线起点
-    vec3 direction; // 光线方向
+    vec3 origin; // the position of the ray
+    vec3 direction; // the direction of the ray
 };
 
 //	Simplex 3D Noise
@@ -137,43 +137,52 @@ vec3 toSpherical(vec3 pos){
     return vec3(rho, theta, phi);
 }
 
-vec3 toXYZ(vec3 sphericalCoord){
-    float rho = sphericalCoord.x;
-    float theta = sphericalCoord.y;
-    float phi = sphericalCoord.z;
-    float x = rho * cos(theta) * sin(phi);
-    float y = rho * sin(theta) * sin(phi);
-    float z = rho * cos(phi);
-    return vec3(x, y, z);
+vec3 acceleration(float h2, vec3 pos, vec3 vel) {
+    // calculate the acceleration of the particle
+
+    float r2 = dot(pos, pos);
+    float r = sqrt(r2);
+    float r3 = r2 * r;
+
+    vec3 acc = vec3(0.0);
+
+    // 1. the Schwarzschild term
+    if (white == 1) {
+        acc += 1.5 * h2 * pos / pow(r2, 2.5);  // repulsive
+    } else {
+        acc += -1.5 * h2 * pos / pow(r2, 2.5); // attractive
+    }
+
+    // 2. Kerr drag term (approximated as 2a (v × ẑ) / r^3)
+    vec3 z_axis = vec3(0.0, 0.0, 1.0);
+    vec3 drag = 2.0 * a * cross(vel, z_axis) / r3;
+    acc += drag;
+
+    return acc;
 }
 
-vec3 acceleration(float h2, vec3 pos) {
-    float r2 = dot(pos, pos);
-    float r5 = pow(r2, 2.5);
-    if(white ==1){return 1.5 * h2 * pos / r5;}
-    return -1.5 * h2 * pos / r5;
-}
 
 
 void rk4(inout vec3 x, inout vec3 v, float h2, float dt) {
-    vec3 k1_v = acceleration(h2, x);
+    vec3 k1_v = acceleration(h2, x, v);
     vec3 k1_x = v;
 
-    vec3 k2_v = acceleration(h2, x + 0.5*dt*k1_x);
-    vec3 k2_x = v + 0.5*dt*k1_v;
+    vec3 k2_v = acceleration(h2, x + 0.5 * dt * k1_x, v + 0.5 * dt * k1_v);
+    vec3 k2_x = v + 0.5 * dt * k1_v;
 
-    vec3 k3_v = acceleration(h2, x + 0.5*dt*k2_x);
-    vec3 k3_x = v + 0.5*dt*k2_v;
+    vec3 k3_v = acceleration(h2, x + 0.5 * dt * k2_x, v + 0.5 * dt * k2_v);
+    vec3 k3_x = v + 0.5 * dt * k2_v;
 
-    vec3 k4_v = acceleration(h2, x + dt*k3_x);
-    vec3 k4_x = v + dt*k3_v;
+    vec3 k4_v = acceleration(h2, x + dt * k3_x, v + dt * k3_v);
+    vec3 k4_x = v + dt * k3_v;
 
-    x += dt * (k1_x + 2.0*k2_x + 2.0*k3_x + k4_x) / 6.0;
-    v += dt * (k1_v + 2.0*k2_v + 2.0*k3_v + k4_v) / 6.0;
+    x += dt * (k1_x + 2.0 * k2_x + 2.0 * k3_x + k4_x) / 6.0;
+    v += dt * (k1_v + 2.0 * k2_v + 2.0 * k3_v + k4_v) / 6.0;
 }
 
+
 float star_map_uv(vec2 uv) {
-    // 使用伪随机数生成一个 repeatable 的纹理
+    // the star map is a 2D texture, so we need to convert the UV coordinates to 0-1 range
     uv = floor(uv * 512.0) / 512.0;
 
     vec2 coord1 = uv;
@@ -187,17 +196,29 @@ float star_map_uv(vec2 uv) {
     return star;
 }
 
+vec3 skyColor(float starIntensity) {
+    // 模拟银河星团的蓝白黄紫调
+    if (starIntensity < 0.001) return vec3(0.0); // 黑
+    if (starIntensity < 0.01)  return vec3(0.2, 0.3, 0.6);   // 深蓝紫（远处背景）
+    if (starIntensity < 0.1)   return vec3(0.5, 0.6, 1.0);   // 冷蓝
+    if (starIntensity < 0.5)   return vec3(1.0, 0.9, 0.7);   // 黄白（恒星）
+    return vec3(1.0); // 饱和白光（极亮星体）
+}
+
 vec3 background_sky_sphere(vec3 x, vec3 direction) {
-    float PI = 3.14159265358979323846;
+
 
     vec3 dir = normalize(direction); 
     float u = 0.5 + atan(dir.x, dir.y) / (2.0 * PI);
     float v = acos(-dir.z) / PI;
     vec2 uv = vec2(u, v) * background_scale;
 
-    float star = star_map_uv(uv); 
+    float star = star_map_uv(uv); // 获取亮度（强度）
 
-    return vec3(star);
+    // 映射颜色
+    vec3 color = skyColor(star);
+
+    return color;
 }
 
 
@@ -285,17 +306,17 @@ float calculateDopplerEffect(vec3 pos, vec3 viewDir)
     float velMag;
     if (display_accretion_disk == 0)
     {
-        velMag = -sqrt((G * M / r));    //non relativistic speed
+        velMag = -sqrt((1.0 / r));    //non relativistic speed
     }
     else if (display_accretion_disk == 1)
     {
-        velMag = -sqrt((G * M / r) * (1.0 - 3.0 * G * M / (r * c * c)));    //relativistic speed
+        velMag = -sqrt((1.0 / r) * (1.0 - 3.0  / (r )));    //relativistic speed
     }
 
     vec3 velDir = normalize(cross(vec3(0.0, 1.0, 0.0), pos));
     vel = velDir * velMag;
 
-    vec3 beta_s = vel / c;
+    vec3 beta_s = vel;
 
     float gamma = 1.0 / sqrt(1.0 - dot(beta_s, beta_s));
     float dopplerShift = gamma * (1.0 + dot(vel, normalize(viewDir)));
@@ -307,7 +328,6 @@ float calculateRealisticTemperature(vec3 pos, float baseTemp) {
     float radius = length(pos);
     return baseTemp * pow(radius, -0.75);
 }
-
 
 void diskRender(vec3 pos, inout vec4 color, inout float alpha, vec3 viewDir){
     float diskHeight = 0.3;
@@ -327,7 +347,7 @@ void diskRender(vec3 pos, inout vec4 color, inout float alpha, vec3 viewDir){
     // vertical density with a linear falloff
     density *= pow(1.0 - abs(pos.y) / diskHeight, diskDensityV);
 
-    // 让密度在接近 innerRadius 时平滑降为零，模拟盘的内部边缘不会太突兀。
+    // radial density with a linear falloff
     density *= smoothstep(innerRadius, innerRadius * 1.1, length(pos));
     
     // if disk density is too low, return   
@@ -373,18 +393,61 @@ void diskRender(vec3 pos, inout vec4 color, inout float alpha, vec3 viewDir){
 
     color += density * alpha * abs(noise) * dustColor;
 
-    if(red_shift==1){
-        color /= redshift;}
+
 
     if(doppler == 1){ 
          color /= doppler * doppler * doppler;}
 }
 
-vec3 raytrace(Ray ray) {
-    const int max_steps = 512;
-    const float dt = 0.05;
-    const float blackhole_radius = Rs;
+float solveKepler(float M, float e) {
+    float E = M;
+    for (int i = 0; i < 5; ++i) { 
+        float f = E - e * sin(E) - M;
+        float fp = 1.0 - e * cos(E);
+        E -= f / fp;
+    }
+    return E;
+}
 
+vec3 computePlanetPosition(
+    float a, float e, float i,
+    float Omega, float omega,
+    float M0, float t
+) {
+    float n = sqrt(1.0 / pow(a, 3.0));  
+    float M = mod(M0 + n * t, 2.0 * 3.1415926);
+
+    float E = solveKepler(M, e);
+
+    float cosE = cos(E);
+    float sinE = sin(E);
+    float sqrt1_e2 = sqrt(1.0 - e * e);
+
+    float sinnu = (sqrt1_e2 * sinE) / (1.0 - e * cosE);
+    float cosnu = (cosE - e) / (1.0 - e * cosE);
+    float nu = atan(sinnu, cosnu);
+
+    float r = a * (1.0 - e * cosE);
+    float x_orb = r * cos(nu);
+    float y_orb = r * sin(nu);
+
+    float cosOmega = cos(Omega);
+    float sinOmega = sin(Omega);
+    float cosomega_plus_nu = cos(omega + nu);
+    float sinomega_plus_nu = sin(omega + nu);
+    float cosi = cos(i);
+    float sini = sin(i);
+
+    float X = r * (cosOmega * cosomega_plus_nu - sinOmega * sinomega_plus_nu * cosi);
+    float Y = r * (sinOmega * cosomega_plus_nu + cosOmega * sinomega_plus_nu * cosi);
+    float Z = r * (sinomega_plus_nu * sini);
+
+    return vec3(X, Z, Y);
+}
+
+
+
+vec3 raytrace(Ray ray) {
     float t = time;
 
     vec3 pos = ray.origin;
@@ -393,20 +456,21 @@ vec3 raytrace(Ray ray) {
     vec3 h = cross(pos, dir);
     float h2 = dot(h, h);
 
-    vec4 accumulated_color = vec4(0.0); // 用 vec4 便于 alpha 衰减混合
-    float alpha = 1;
-
-    if(show_blackhole == 0) {
-        return background_color(pos, ray.direction); // 不渲染黑洞
-    }
+    vec4 accumulated_color = vec4(0.0); 
+    float alpha = 1.0;
 
     for (int i = 0; i < max_steps; ++i) {
         // disk 渲染（无论当前位置是否接近黑洞）
         // 积分一步
-        rk4(pos,  dir,h2, dt);
-        
-        
-        if (length(pos) < blackhole_radius && white == 0) {
+            if(show_blackhole == 0) {
+                //光线沿直线传播
+                pos += dir * dt;
+            }
+            else{
+                rk4(pos,  dir,h2, dt);
+            }
+
+        if (length(pos) < 1.0 && white == 0 && show_blackhole == 1) {
             // 黑洞吸收
             return accumulated_color.rgb; // 完全被吸收，事件视界内不可逃逸
         }
@@ -415,15 +479,41 @@ vec3 raytrace(Ray ray) {
         diskRender(pos, accumulated_color, alpha, dir);
         }
 
-        // the planet
-        t-=dt;
-        vec3 planet_pos = vec3(Rp * cos(av * t), 0.0, Rp * sin(av * t));
-        if(length(pos-planet_pos) < rp) {
-            float planet_alpha = 1.0;
-            vec4 pc=accumulated_color + vec4(planet_color, planet_alpha);
-            return pc.rgb;
+        if(display_planet == 1){
+            t-=dt;
+            vec3 planet_pos = computePlanetPosition(
+            demi_grand_axe,
+            eccentricity,
+            inclination,
+        longtitude_du_noeud_ascendant,
+        argument_du_periapside,
+            mean_anomaly,
+            t
+            );
+            if(length(pos - planet_pos) < rp) {
+                vec3 planetRel = normalize(pos - planet_pos);
+                float lat = asin(planetRel.y);
+                float lon = atan(planetRel.z, planetRel.x);
+                if (lon < 0.0) lon += 2.0 * PI;
+
+                float spacing = radians(30.0);     // 稀疏一点
+                float thickness = radians(2.0);    // 更粗一点
+
+                float lat_d = abs(mod(lat + spacing * 0.5, spacing) - spacing * 0.5);
+                float lon_d = abs(mod(lon + spacing * 0.5, spacing) - spacing * 0.5);
+
+                float lat_line = step(lat_d, thickness);
+                float lon_line = step(lon_d, thickness);
+                float grid = max(lat_line, lon_line);
+
+                vec3 grid_color = vec3(0.2); // 深灰
+                vec3 final_color = mix(planet_color, grid_color, grid);
+
+                return (accumulated_color + vec4(final_color, 1.0)).rgb;
+                }
+                
         }
-        
+
     }
 
     // 添加背景（天空球/星空/渐变）
@@ -447,7 +537,7 @@ struct Geodesic {
     int toInfinity;// is the geodesic escaping to infinity? 1: yes, 0: no
 };
 // Kerr black hole functions
-// Kerr 黑洞函数
+
 float rho2(float r, float theta) {
     return r*r + a*a*cos(theta)*cos(theta);
 }
@@ -513,9 +603,6 @@ float Theta(float r, float theta,float b,float q) {
 float Theta(float p_theta){
     return p_theta*p_theta;
 }
-
-
-
 
 //---------------------------------------------------------------------
 // to see the geodesic is escaping to infinity
@@ -845,6 +932,8 @@ vec3 raytrace_kerr(Geodesic g) {
 
 }
 
+//----------------------------------------------------------
+
 void main() {
     // the view matrix is defined by the camera position and orientation
     mat4 view_inv = inverse(view);
@@ -872,10 +961,10 @@ void main() {
     //5. the direction of light is noted by two vairables:  theta_cs and phi_cs
     //6. theta_cs and phi_cs are defined as the spherical coordinates that takes z-axis as the polar axis and x-axis as the azimuthal axis
 
-// 转到相机空间（Kip Thorne 定义的右-前-上坐标系）
+    // 转到相机空间（Kip Thorne 定义的右-前-上坐标系）
     vec3 ray_dir_camera = mat3(view) * ray_dir_world;
 
-// 转球坐标
+    // 转球坐标
     float theta = acos(ray_dir_camera.z); // z 是上，极角
     float phi = atan(ray_dir_camera.y, ray_dir_camera.x); // 方位角
 
@@ -885,7 +974,7 @@ void main() {
 
     Ray ray;
 
-        if (kerr == 1) {
+        if (realistic_raytracing == 1) {
             if (show_blackhole == 0) {
                 color= background_kerr_grid(    acos(ray_dir_world.z),atan(ray_dir_world.y,ray_dir_world.x) );
             }else {

@@ -14,16 +14,37 @@ using cgp::timer_basic;
 // Variables associated to the GUI (buttons, etc)
 struct gui_parameters {
 	bool display_frame = false;
+	int raytracing_step = 512;
+	float raytracing_step_size = 0.05f;
+	bool display_wireframe = false;
+	bool realistic_raytracing=false;
+};
+
+struct BlackHole {
 	bool show_blackhole = true;
-    bool kerr=false;
-    // Ajout de la nouvelle variable display_wireframe ici
-    bool display_wireframe = false;
-	bool display_accretion_disk = true;
 	bool white = false;
-	bool red_shift = false;
-	bool doppler = false;
-	bool temperature_realistic = false;
-	float accretionTemp=10000.0f;
+	float a = 0.0f; // Kerr parameter
+};
+
+struct accretion_disk_parameters {
+	bool display_accretion_disk = true;
+	bool red_shift = true;
+	bool doppler = true;
+	bool temperature_realistic = true;
+	float accretionTemp=20000.0f;
+};
+
+struct planet_parameters {
+	// keppler's six parameters to define the planet orbit
+	bool display_planet = true;
+	float demi_grand_axe = 3.0f;
+	float eccentricity = 0.0f;
+	float inclination = 0.0f;
+	float longtitude_du_noeud_ascendant = 0.0f;
+	float argument_du_periapside = 0.0f;
+	float mean_anomaly = 0.0f;
+	float rp = 0.5f; // planet radius
+	vec3 planet_color = vec3(0.63, 0.8, 0.13);
 };
 
 // The structure of the custom scene
@@ -42,7 +63,9 @@ struct scene_structure : cgp::scene_inputs_generic {
 	input_devices inputs;                // Storage for inputs status (mouse, keyboard, window dimension)
 	gui_parameters gui;                  // Standard GUI element storage
 	GLuint star_texture_id;
-
+	planet_parameters planet;
+	BlackHole blackhole;
+	accretion_disk_parameters accretion_disk_parameters;
 	// ****************************** //
 	// Elements and shapes of the scene
 	// ****************************** //

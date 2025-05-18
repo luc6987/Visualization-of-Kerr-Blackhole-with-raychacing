@@ -10,7 +10,7 @@ void scene_structure::initialize()
 	camera_control.initialize(inputs, window); 
 	camera_control.set_rotation_axis_z();
 	camera_control.look_at(
-    { 0.0f, -2.0f, -15.0f }, // 摄像机位置
+    { 0.0f, 2.0f, 15.0f }, // 摄像机位置
 	{ 0.0f,  0.0f, 0.0f }, // 观察点
 	{ 0.0f,  0.0f, 1.0f }  // 上方向
 	);
@@ -32,7 +32,7 @@ void scene_structure::initialize()
 	screen_quad_drawable.initialize_data_on_gpu(screen_quad);
 
 	// 加载自定义光线追踪着色器
-	if (gui.kerr) {
+	if (gui.realistic_raytracing) {
 		screen_shader.load(
 			project::path + "shaders/Kerr/screen_quad.vert.glsl",
 			project::path + "shaders/Kerr/screen_quad.frag.glsl"
@@ -62,45 +62,59 @@ void scene_structure::initialize()
 	std::cout << "End function scene_structure::initialize()" << std::endl;
 }
 
+// 显示和传递所有uniform参数到shader，并绘制全屏四边形
 void scene_structure::display_frame()
-{   environment.uniform_generic.uniform_int["background_type"] = environment.background.type;
+{
+	// 1. 设置环境相关uniform
+	environment.uniform_generic.uniform_int["background_type"] = environment.background.type;
 	environment.uniform_generic.uniform_float["background_scale"] = environment.background.scale;
-	environment.uniform_generic.uniform_float["background_distance"] = environment.background.distance;	
+	environment.uniform_generic.uniform_float["background_distance"] = environment.background.distance;
 	environment.uniform_generic.uniform_vec3["cam_pos"] = camera_control.camera_model.position();
 	environment.uniform_generic.uniform_float["fov_y"] = camera_projection.field_of_view * 180.0f / Pi;
 	environment.uniform_generic.uniform_float["aspect_ratio"] = camera_projection.aspect_ratio;
 	environment.uniform_generic.uniform_vec2["resolution"] = {window.width, window.height};
-	environment.uniform_generic.uniform_int["show_blackhole"] = gui.show_blackhole ? 1 : 0;
-	environment.uniform_generic.uniform_int["kerr"] = gui.kerr ? 1 : 0;
-	environment.uniform_generic.uniform_int["display_accretion_disk"] = gui.display_accretion_disk ? 1 : 0;
-	environment.uniform_generic.uniform_int["white"] = gui.white ? 1 : 0;
-	environment.uniform_generic.uniform_int["red_shift"] = gui.red_shift ? 1 : 0;
-	environment.uniform_generic.uniform_int["dopple"] = gui.doppler ? 1 : 0;
-	environment.uniform_generic.uniform_int["temperature_realistic"] = gui.temperature_realistic ? 1 : 0;
-	environment.uniform_generic.uniform_float["accretionTemp"] = gui.accretionTemp;
-	
-	// Bind shader and texture
-	// glUseProgram(screen_shader.id);
+		environment.uniform_generic.uniform_int["realistic_raytracing"] = gui.realistic_raytracing ? 1 : 0;
 
-	// GLint loc = glGetUniformLocation(screen_shader.id, "star_map");
-	// if (loc >= 0) {
-    // 	glActiveTexture(GL_TEXTURE0);
-    // 	glBindTexture(GL_TEXTURE_2D, star_texture_id);
-    // 	glUniform1i(loc, 0); // GL_TEXTURE0
-	// }
+	// 2. 设置黑洞相关uniform
+	environment.uniform_generic.uniform_int["show_blackhole"] = blackhole.show_blackhole ? 1 : 0;
+	environment.uniform_generic.uniform_int["white"] = blackhole.white ? 1 : 0;
+	environment.uniform_generic.uniform_float["a"] = blackhole.a;
 
+	// 3. 设置光线追踪相关uniform
+	environment.uniform_generic.uniform_int["max_steps"] = gui.raytracing_step;
+	environment.uniform_generic.uniform_float["dt"] = gui.raytracing_step_size;
 
+	// 4. 设置吸积盘相关uniform
+	environment.uniform_generic.uniform_int["display_accretion_disk"] = accretion_disk_parameters.display_accretion_disk ? 1 : 0;
+	environment.uniform_generic.uniform_int["red_shift"] = accretion_disk_parameters.red_shift ? 1 : 0;
+	environment.uniform_generic.uniform_int["doppler"] = accretion_disk_parameters.doppler ? 1 : 0;
+	environment.uniform_generic.uniform_int["temperature_realistic"] = accretion_disk_parameters.temperature_realistic ? 1 : 0;
+	environment.uniform_generic.uniform_float["accretionTemp"] = accretion_disk_parameters.accretionTemp;
+
+	// 5. 设置行星相关uniform
+	environment.uniform_generic.uniform_int["display_planet"] = planet.display_planet ? 1 : 0;
+	environment.uniform_generic.uniform_float["demi_grand_axe"] = planet.demi_grand_axe;
+	environment.uniform_generic.uniform_float["eccentricity"] = planet.eccentricity;
+	environment.uniform_generic.uniform_float["inclination"] = planet.inclination;
+	environment.uniform_generic.uniform_float["longtitude_du_noeud_ascendant"] = planet.longtitude_du_noeud_ascendant;
+	environment.uniform_generic.uniform_float["argument_du_periapside"] = planet.argument_du_periapside;
+	environment.uniform_generic.uniform_float["mean_anomaly"] = planet.mean_anomaly;
+	environment.uniform_generic.uniform_float["rp"] = planet.rp;
+	environment.uniform_generic.uniform_vec3["planet_color"] = planet.planet_color;
+
+	// 6. 相机朝向矩阵传递
 	mat4 const& cam_frame = camera_control.camera_model.matrix_frame();
 	additional_parameters.uniform_mat3["cam_orientation"] = mat3(cam_frame);
-	
+
+	// 7. 时间参数
 	glDisable(GL_DEPTH_TEST); // 不需要深度测试
 	timer.update();
 	additional_parameters.uniform_float["time"] = timer.t;
 
-	// 绘制全屏四边形
-	draw(screen_quad_drawable, environment,1,true,additional_parameters);
+	// 8. 绘制全屏四边形
+	draw(screen_quad_drawable, environment, 1, true, additional_parameters);
 
-	// 可选：坐标轴辅助框
+	// 9. 可选：绘制辅助坐标系
 	if (gui.display_frame)
 		draw(global_frame, environment);
 }
@@ -108,26 +122,46 @@ void scene_structure::display_frame()
 void scene_structure::display_gui()
 {   cgp::vec3 cam_position = camera_control.camera_model.position();
 	
-
+	//parametre for the environment
 	ImGui::SliderFloat("Background scale", &environment.background.scale, 0.1f, 10.0f);
 	ImGui::SliderFloat("Background distance", &environment.background.distance, 1.0f, 50.0f);
 	ImGui::Combo("Background type", &environment.background.type, "Checkerboard\0Gradient\0Stars\0");
-
-	ImGui::Checkbox("kerr black hole",&gui.kerr);
-	ImGui::Checkbox("Accretion disk", &gui.display_accretion_disk);
-	ImGui::Checkbox("Show black hole", &gui.show_blackhole);
 	ImGui::Checkbox("Frame", &gui.display_frame);
-	ImGui::Checkbox("white", &gui.white);
-	ImGui::Checkbox("red shift", &gui.red_shift);
-	ImGui::Checkbox("doppler", &gui.doppler);
-	ImGui::Checkbox("temperature realistic", &gui.temperature_realistic);
-	ImGui::SliderFloat("field of view", &camera_projection.field_of_view, 0.0f, 5.0f);
-	ImGui::SliderFloat("accretion disk temperature", &gui.accretionTemp, 1000.0f, 40000.0f);
+	ImGui::Checkbox("Realistic raytracing(beta)",&gui.realistic_raytracing);
+
+	//parametre for the camera
 	ImGui::Text("Cam pos: (%.2f, %.2f, %.2f)", cam_position.x, cam_position.y, cam_position.z);
 	vec3 cam_dir=normalize(-inverse(camera_control.camera_model.matrix_view())[2].xyz());
 	ImGui::Text("Cam orientation: (%.2f, %.2f, %.2f)",cam_dir.x, cam_dir.y, cam_dir.z);
-
+	ImGui::SliderInt("Raytracing step", &gui.raytracing_step, 1, 1000);
+	ImGui::SliderFloat("Raytracing step size", &gui.raytracing_step_size, 0.001f, 0.1f);
+	ImGui::SliderFloat("field of view", &camera_projection.field_of_view, 0.0f, 5.0f);
 	
+
+	//parametre for the black hole
+	ImGui::Checkbox("Show black hole", &blackhole.show_blackhole);
+	ImGui::Checkbox("white hole", &blackhole.white);
+	ImGui::SliderFloat("Kerr parameter", &blackhole.a, 0.0f, 1.0f);
+
+	//parametre for the accretion disk
+	ImGui::Checkbox("Accretion disk", &accretion_disk_parameters.display_accretion_disk);
+	ImGui::Checkbox("red shift", &accretion_disk_parameters.red_shift);
+	ImGui::Checkbox("doppler", &accretion_disk_parameters.doppler);
+	ImGui::Checkbox("temperature realistic", &accretion_disk_parameters.temperature_realistic);
+	ImGui::SliderFloat("accretion disk temperature", &accretion_disk_parameters.accretionTemp, 1000.0f, 40000.0f);
+
+	//parametre for the planet
+	ImGui::Text("Planet parameters");
+	ImGui::Checkbox("Display planet", &planet.display_planet);
+    ImGui::SliderFloat("Demi Grand Axe", &planet.demi_grand_axe, 0.0f, 10.0f);
+	ImGui::SliderFloat("Eccentricity", &planet.eccentricity, 0.0f, 1.0f);
+	ImGui::SliderFloat("Inclination", &planet.inclination, 0.0f, 3.14f);
+	ImGui::SliderFloat("Longtitude du noeud ascendant", &planet.longtitude_du_noeud_ascendant, 0.0f, 3.14f);
+	ImGui::SliderFloat("Argument du periapside", &planet.argument_du_periapside, 0.0f, 3.14f);
+	ImGui::SliderFloat("Mean Anomaly", &planet.mean_anomaly, 0.0f, 3.14f);
+	ImGui::SliderFloat("Planet radius", &planet.rp, 0.0f, 1.0f);
+	ImGui::ColorEdit3("Planet color", &planet.planet_color.x);
+	ImGui::Text("Planet color: (%.2f, %.2f, %.2f)", planet.planet_color.x, planet.planet_color.y, planet.planet_color.z);
 }
 
 void scene_structure::mouse_move_event()
