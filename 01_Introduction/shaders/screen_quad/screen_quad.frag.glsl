@@ -45,7 +45,7 @@ const float dt = 0.05;// 积分步长
 // integration step
 
 const float Rp = 5.0f; // the radius of the revolution of the planet
-const float rp = 0.5f; // the radius of the rotation of the planet
+const float rp = 1.5f; // the radius of the rotation of the planet
 const vec3 planet_color = vec3(0.63, 0.8, 0.13); // planet color
 const float av = 0.1f; // the rotation speed of the planet
 
