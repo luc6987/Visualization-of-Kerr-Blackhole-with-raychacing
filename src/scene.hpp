@@ -41,7 +41,7 @@ struct planet_parameters {
 	float inclination = 0.0f;// Inclination
 	float longtitude_du_noeud_ascendant = 0.0f;// Longitude of the ascending node
 	float argument_du_periapside = 0.0f;// Argument of periapsis
-	float mean_anomaly = 0.0f;// Mean anomaly
+	float mean_anomaly = 3.0f;// Mean anomaly
 	float rp = 1.0f; // planet radius
 	vec3 planet_color = vec3(0.63, 0.8, 0.13);// Planet color
 };
