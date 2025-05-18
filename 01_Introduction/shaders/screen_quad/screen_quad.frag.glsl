@@ -161,8 +161,6 @@ vec3 acceleration(float h2, vec3 pos, vec3 vel) {
     return acc;
 }
 
-
-
 void rk4(inout vec3 x, inout vec3 v, float h2, float dt) {
     vec3 k1_v = acceleration(h2, x, v);
     vec3 k1_x = v;
@@ -197,12 +195,12 @@ float star_map_uv(vec2 uv) {
 }
 
 vec3 skyColor(float starIntensity) {
-    // 模拟银河星团的蓝白黄紫调
-    if (starIntensity < 0.001) return vec3(0.0); // 黑
-    if (starIntensity < 0.01)  return vec3(0.2, 0.3, 0.6);   // 深蓝紫（远处背景）
-    if (starIntensity < 0.1)   return vec3(0.5, 0.6, 1.0);   // 冷蓝
-    if (starIntensity < 0.5)   return vec3(1.0, 0.9, 0.7);   // 黄白（恒星）
-    return vec3(1.0); // 饱和白光（极亮星体）
+    // similat to the star map, we need to convert the intensity to a color
+    if (starIntensity < 0.001) return vec3(0.0); 
+    if (starIntensity < 0.01)  return vec3(0.2, 0.3, 0.6);   
+    if (starIntensity < 0.1)   return vec3(0.5, 0.6, 1.0);  
+    if (starIntensity < 0.5)   return vec3(1.0, 0.9, 0.7);   
+    return vec3(1.0);
 }
 
 vec3 background_sky_sphere(vec3 x, vec3 direction) {
@@ -213,30 +211,16 @@ vec3 background_sky_sphere(vec3 x, vec3 direction) {
     float v = acos(-dir.z) / PI;
     vec2 uv = vec2(u, v) * background_scale;
 
-    float star = star_map_uv(uv); // 获取亮度（强度）
-
-    // 映射颜色
+    float star = star_map_uv(uv); 
     vec3 color = skyColor(star);
-
     return color;
 }
-
-
-// vec3 background_sky_sphere(vec3 x, vec3 direction) {
-//     vec3 local_dir = normalize(cam_orientation * direction); // 防止光线方0非单位向量
-//     vec2 uv = sphericalUV(local_dir);
-//     vec3 color = texture(star_map, uv).rgb;
-//     color = pow(color, vec3(1.0 / 2.2)); // gamma correction
-//     return color;
-// }
-
-
 
 vec3 background_plane(vec3 x, vec3 direction) {
     float d = background_distance;
     vec3 origin = x;
     vec3 dir = direction;
-    if (dir.z >= 0.0) return vec3(0.0); // 朝前方不渲染背景
+    if (dir.z >= 0.0) return vec3(0.0); 
 
     float t = -(origin.z + d) / dir.z;
     vec3 hit = origin + t * dir;
@@ -248,7 +232,7 @@ vec3 background_plane(vec3 x, vec3 direction) {
         return vec3(color);
     }
     else {
-        return vec3(coord * 0.5, 0.5); // 伪渐变
+        return vec3(coord * 0.5, 0.5); 
     };
 }
 
@@ -409,11 +393,15 @@ float solveKepler(float M, float e) {
     return E;
 }
 
-vec3 computePlanetPosition(
-    float a, float e, float i,
-    float Omega, float omega,
-    float M0, float t
-) {
+vec3 computePlanetPosition(float t) {
+
+    float a = demi_grand_axe;
+    float e = eccentricity;
+    float i = inclination;
+    float Omega = longtitude_du_noeud_ascendant;
+    float omega = argument_du_periapside;
+    float M0 = mean_anomaly;
+
     float n = sqrt(1.0 / pow(a, 3.0));  
     float M = mod(M0 + n * t, 2.0 * 3.1415926);
 
@@ -445,6 +433,24 @@ vec3 computePlanetPosition(
     return vec3(X, Z, Y);
 }
 
+vec3 planet_grid_color(vec3 pos, vec3 planet_pos, out float grid) {
+    vec3 planetRel = normalize(pos - planet_pos);
+    float lat = asin(planetRel.y);
+    float lon = atan(planetRel.z, planetRel.x);
+    if (lon < 0.0) lon += 2.0 * PI;
+
+    float spacing = radians(30.0);     
+    float thickness = radians(2.0);    
+
+    float lat_d = abs(mod(lat + spacing * 0.5, spacing) - spacing * 0.5);
+    float lon_d = abs(mod(lon + spacing * 0.5, spacing) - spacing * 0.5);
+
+    float lat_line = step(lat_d, thickness);
+    float lon_line = step(lon_d, thickness);
+    grid = max(lat_line, lon_line);
+
+    return vec3(0.0); // grid_color
+}
 
 
 vec3 raytrace(Ray ray) {
@@ -460,19 +466,19 @@ vec3 raytrace(Ray ray) {
     float alpha = 1.0;
 
     for (int i = 0; i < max_steps; ++i) {
-        // disk 渲染（无论当前位置是否接近黑洞）
-        // 积分一步
+        // take a step
             if(show_blackhole == 0) {
-                //光线沿直线传播
+                // if the black hole is not shown, the ray propagates in a straight line
                 pos += dir * dt;
             }
             else{
+                // if the black hole is shown, the ray propagates in a curved path
                 rk4(pos,  dir,h2, dt);
             }
 
         if (length(pos) < 1.0 && white == 0 && show_blackhole == 1) {
-            // 黑洞吸收
-            return accumulated_color.rgb; // 完全被吸收，事件视界内不可逃逸
+            // absorbed by the black hole
+            return accumulated_color.rgb; 
         }
 
         if(display_accretion_disk == 1) {
@@ -481,42 +487,17 @@ vec3 raytrace(Ray ray) {
 
         if(display_planet == 1){
             t-=dt;
-            vec3 planet_pos = computePlanetPosition(
-            demi_grand_axe,
-            eccentricity,
-            inclination,
-        longtitude_du_noeud_ascendant,
-        argument_du_periapside,
-            mean_anomaly,
-            t
-            );
+            vec3 planet_pos = computePlanetPosition(t);
             if(length(pos - planet_pos) < rp) {
-                vec3 planetRel = normalize(pos - planet_pos);
-                float lat = asin(planetRel.y);
-                float lon = atan(planetRel.z, planetRel.x);
-                if (lon < 0.0) lon += 2.0 * PI;
-
-                float spacing = radians(30.0);     // 稀疏一点
-                float thickness = radians(2.0);    // 更粗一点
-
-                float lat_d = abs(mod(lat + spacing * 0.5, spacing) - spacing * 0.5);
-                float lon_d = abs(mod(lon + spacing * 0.5, spacing) - spacing * 0.5);
-
-                float lat_line = step(lat_d, thickness);
-                float lon_line = step(lon_d, thickness);
-                float grid = max(lat_line, lon_line);
-
-                vec3 grid_color = vec3(0.2); // 深灰
+                float grid;
+                vec3 grid_color=planet_grid_color(pos, planet_pos,grid);
                 vec3 final_color = mix(planet_color, grid_color, grid);
 
                 return (accumulated_color + vec4(final_color, 1.0)).rgb;
-                }
-                
+                }      
         }
-
     }
 
-    // 添加背景（天空球/星空/渐变）
     vec3 bg = background_color(pos, dir);
 
     return accumulated_color.rgb + alpha * bg;
@@ -951,6 +932,7 @@ void main() {
     float y = ndc.y * tan_half_fov;
 
     // 构造世界空间中的光线方向
+    // construct the ray direction in world space
     vec3 ray_dir_world = normalize(x * cam_right +  y *cam_up + cam_forward);
 
     //In the raytracing, according to the paper of K. Thorne, the reference frame which is connected to the camera is difined as follow:
@@ -962,11 +944,13 @@ void main() {
     //6. theta_cs and phi_cs are defined as the spherical coordinates that takes z-axis as the polar axis and x-axis as the azimuthal axis
 
     // 转到相机空间（Kip Thorne 定义的右-前-上坐标系）
+    // to camera space (right-forward-up coordinate system defined by Kip Thorne)
     vec3 ray_dir_camera = mat3(view) * ray_dir_world;
 
     // 转球坐标
-    float theta = acos(ray_dir_camera.z); // z 是上，极角
-    float phi = atan(ray_dir_camera.y, ray_dir_camera.x); // 方位角
+    // spherical coordinates
+    float theta = acos(ray_dir_camera.z); 
+    float phi = atan(ray_dir_camera.y, ray_dir_camera.x); 
 
     vec2 ray_dir_local_spherical = vec2(theta, phi);
 
