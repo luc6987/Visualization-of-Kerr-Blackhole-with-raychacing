@@ -36,13 +36,13 @@ struct accretion_disk_parameters {
 struct planet_parameters {
 	// keppler's six parameters to define the planet orbit
 	bool display_planet = true;// Display the planet
-	float demi_grand_axe = 3.0f;// semi-major axis
+	float demi_grand_axe = 5.0f;// semi-major axis
 	float eccentricity = 0.0f;// Eccentricity
 	float inclination = 0.0f;// Inclination
 	float longtitude_du_noeud_ascendant = 0.0f;// Longitude of the ascending node
 	float argument_du_periapside = 0.0f;// Argument of periapsis
 	float mean_anomaly = 0.0f;// Mean anomaly
-	float rp = 0.5f; // planet radius
+	float rp = 1.0f; // planet radius
 	vec3 planet_color = vec3(0.63, 0.8, 0.13);// Planet color
 };
 

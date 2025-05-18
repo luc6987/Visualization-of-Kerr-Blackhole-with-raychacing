@@ -204,27 +204,45 @@ float star_map_uv(vec2 uv) {
     float s1 = fract(sin(dot(coord1, vec2(12.9898, 78.233))) * 43758.5453);
     float s2 = fract(sin(dot(coord2, vec2(93.9898, 67.345))) * 15731.345);
 
-    float star = step(0.996, s1) * s2;
-
+    float threshold = mix(0.98, 1.0, clamp((background_scale - 0.1) / (10.0 - 0.1), 0.0, 1.0));
+    float star = smoothstep(threshold, 1.0, s1) * s2;
     return star;
 }
+vec3 getSkyPaletteColor(float t) {
+    vec3 colors[5];
+    colors[0] = vec3(1.0, 0.5, 0.3);  // M型：暗红
+    colors[1] = vec3(1.0, 0.7, 0.4);  // K型：橙色
+    colors[2] = vec3(1.0, 0.95, 0.7); // G型：太阳黄
+    colors[3] = vec3(1.0, 1.0, 0.9);  // F型：中性白
+    colors[4] = vec3(0.9, 0.95, 1.0); // A型：轻微冷色
 
-vec3 skyColor(float starIntensity) {
-    // similat to the star map, we need to convert the intensity to a color
-    if (starIntensity < 0.001) return vec3(0.0); 
-    if (starIntensity < 0.01)  return vec3(0.2, 0.3, 0.6);   
-    if (starIntensity < 0.1)   return vec3(0.5, 0.6, 1.0);  
-    if (starIntensity < 0.5)   return vec3(1.0, 0.9, 0.7);   
-    return vec3(1.0);
+    float noise = fract(sin(dot(uv * 100.0, vec2(12.9898, 78.233))) * 43758.5453);
+    t = clamp(t + (noise - 0.5) * 0.2, 0.0, 1.0); // 加噪声扰动
+
+    float scaled = t * 4.0;
+    int i = int(floor(scaled));
+    float f = fract(scaled);
+
+    if (i >= 4) return colors[4];
+    return mix(colors[i], colors[i+1], f);
 }
 
-vec3 background_sky_sphere(vec3 x, vec3 direction) {
+
+vec3 skyColor(float starIntensity) {
+    float normalized = pow(clamp(starIntensity, 0.0, 1.0), 0.4);
+    vec3 baseColor = getSkyPaletteColor(normalized);
+    float brightness = pow(clamp(starIntensity * 2.0, 0.0, 1.0), 0.8);
+    return baseColor * brightness;
+}
+
+
+vec3 background_sky_sphere( vec3 direction) {
 
 
     vec3 dir = normalize(direction); 
     float u = 0.5 + atan(dir.x, dir.y) / (2.0 * PI);
     float v = acos(-dir.z) / PI;
-    vec2 uv = vec2(u, v) * background_scale;
+    vec2 uv = vec2(u, v)*background_distance/5.0f;
 
     float star = star_map_uv(uv); 
     vec3 color = skyColor(star);
@@ -255,7 +273,7 @@ vec3 background_color(vec3 x, vec3 direction) {
     
 
     if (background_type==2)
-        return background_sky_sphere(x, direction);
+        return background_sky_sphere(direction);
     else
         return background_plane(x, direction);
 }

@@ -59,7 +59,7 @@ void scene_structure::display_frame()
 	environment.uniform_generic.uniform_float["fov_y"] = camera_projection.field_of_view * 180.0f / Pi;
 	environment.uniform_generic.uniform_float["aspect_ratio"] = camera_projection.aspect_ratio;
 	environment.uniform_generic.uniform_vec2["resolution"] = {window.width, window.height};
-		environment.uniform_generic.uniform_int["realistic_raytracing"] = gui.realistic_raytracing ? 1 : 0;
+	environment.uniform_generic.uniform_int["realistic_raytracing"] = gui.realistic_raytracing ? 1 : 0;
 
 	// 2. setup the black hole related uniforms
 	environment.uniform_generic.uniform_int["show_blackhole"] = blackhole.show_blackhole ? 1 : 0;
