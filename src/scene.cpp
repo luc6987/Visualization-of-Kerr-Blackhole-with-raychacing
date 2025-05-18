@@ -31,17 +31,12 @@ void scene_structure::initialize()
 	screen_quad_drawable.initialize_data_on_gpu(screen_quad);
 
 	// load custom ray tracing shader
-	if (gui.realistic_raytracing) {
-		screen_shader.load(
-			project::path + "shaders/Kerr/screen_quad.vert.glsl",
-			project::path + "shaders/Kerr/screen_quad.frag.glsl"
-		);
-	} else {
-		screen_shader.load(
-			project::path + "shaders/screen_quad/screen_quad.vert.glsl",
-			project::path + "shaders/screen_quad/screen_quad.frag.glsl"
-		);
-	}
+
+screen_shader.load(
+	project::path + "shaders/screen_quad/screen_quad.vert.glsl",
+	project::path + "shaders/screen_quad/screen_quad.frag.glsl"
+);
+
 
 	screen_quad_drawable.shader = screen_shader;
 

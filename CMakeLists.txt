@@ -29,6 +29,9 @@ set(CMAKE_CONFIGURATION_TYPES RelWithDebInfo)
 #    You may want to change this definition in case of specific file structure
 file(GLOB_RECURSE src_files ${CMAKE_CURRENT_LIST_DIR}/src/*.[ch]pp ${CMAKE_CURRENT_LIST_DIR}/shaders/*.glsl)
 
+# 创建伪目标，确保编译时 shader 会拼接
+add_custom_target(combine_shader ALL DEPENDS ${SHADER_OUTPUT})
+
 
 # Generate the executable_name from the current directory name
 get_filename_component(executable_name ${CMAKE_CURRENT_LIST_DIR} NAME)
@@ -97,4 +100,5 @@ target_link_libraries(${executable_name} ${GLFW_LIBRARIES})
 if(UNIX)
    target_link_libraries(${executable_name} dl) #dlopen is required by Glad on Unix
 endif()
+
 
