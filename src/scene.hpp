@@ -25,7 +25,7 @@ struct BlackHole {
 	float a = 0.0f; // Kerr parameter
 };
 
-struct accretion_disk_parameters {
+struct accretion_disk_parameter {
 	bool display_accretion_disk = true;// Display the accretion disk
 	bool red_shift = true;// Display the red shift
 	bool doppler = true;// Display the Doppler effect
@@ -33,7 +33,7 @@ struct accretion_disk_parameters {
 	float accretionTemp=20000.0f;// Accretion disk temperature
 };
 
-struct planet_parameters {
+struct planet_parameter {
 	// keppler's six parameters to define the planet orbit
 	bool display_planet = true;// Display the planet
 	float demi_grand_axe = 5.0f;// semi-major axis
@@ -43,7 +43,8 @@ struct planet_parameters {
 	float argument_du_periapside = 0.0f;// Argument of periapsis
 	float mean_anomaly = 3.0f;// Mean anomaly
 	float rp = 1.0f; // planet radius
-	vec3 planet_color = vec3(0.63, 0.8, 0.13);// Planet color
+	vec3 rgb = vec3(12,253,27)/255.0f; // Planet color
+	vec3 planet_color = rgb;// Planet color
 };
 
 // The structure of the custom scene
@@ -62,9 +63,9 @@ struct scene_structure : cgp::scene_inputs_generic {
 	input_devices inputs;                // Storage for inputs status (mouse, keyboard, window dimension)
 	gui_parameters gui;                  // Standard GUI element storage
 	GLuint star_texture_id;
-	planet_parameters planet;
+	planet_parameter planet;
 	BlackHole blackhole;
-	accretion_disk_parameters accretion_disk_parameters;
+	accretion_disk_parameter accretion_disk_parameters;
 	// ****************************** //
 	// Elements and shapes of the scene
 	// ****************************** //

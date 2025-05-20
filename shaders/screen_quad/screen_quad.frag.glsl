@@ -14,8 +14,8 @@ uniform int background_type;
 uniform float background_scale;
 uniform float background_distance;
 uniform mat4 view;
-const float beta = 0.0f; // velocity of camera
 uniform int realistic_raytracing; 
+const float beta = 0.0f; // velocity of camera for realistic_raytracing
 
 // parameters for black hole
 uniform int show_blackhole;
@@ -150,6 +150,7 @@ vec3 acceleration(float h2, vec3 pos, vec3 vel) {
     // 1. the Schwarzschild term
     if (white == 1) {
         acc += 1.5 * h2 * pos / pow(r2, 2.5);  // repulsive
+        return acc;
     } else {
         acc += -1.5 * h2 * pos / pow(r2, 2.5); // attractive
     }
@@ -428,14 +429,14 @@ float solveKepler(float M, float e) {
 
 vec3 computePlanetPosition(float t) {
 
-    float a = demi_grand_axe;
+    float A = demi_grand_axe;
     float e = eccentricity;
     float i = inclination;
     float Omega = longtitude_du_noeud_ascendant;
     float omega = argument_du_periapside;
     float M0 = mean_anomaly;
 
-    float n = sqrt(1.0 / pow(a, 3.0));  
+    float n = sqrt(1.0 / pow(A, 3.0));  
     float M = mod(M0 + n * t, 2.0 * 3.1415926);
 
     float E = solveKepler(M, e);
@@ -448,7 +449,7 @@ vec3 computePlanetPosition(float t) {
     float cosnu = (cosE - e) / (1.0 - e * cosE);
     float nu = atan(sinnu, cosnu);
 
-    float r = a * (1.0 - e * cosE);
+    float r = A * (1.0 - e * cosE);
     float x_orb = r * cos(nu);
     float y_orb = r * sin(nu);
 

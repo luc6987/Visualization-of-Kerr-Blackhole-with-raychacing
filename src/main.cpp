@@ -130,6 +130,7 @@ void animation_loop()
 	// Call the display of the scene
 	scene.display_frame();
 
+	//
 
 	// End of ImGui display and handle GLFW events
 	ImGui::End();

@@ -67,7 +67,7 @@ void scene_structure::display_frame()
 	environment.uniform_generic.uniform_float["a"] = blackhole.a;
 
 	// 3. setup the ray tracing related uniforms
-	environment.uniform_generic.uniform_int["integrator"] = gui.integrator;
+	environment.uniform_generic.uniform_int["int*egrator"] = gui.integrator;
 	environment.uniform_generic.uniform_int["max_steps"] = gui.raytracing_step;
 	environment.uniform_generic.uniform_float["dt"] = gui.raytracing_step_size;
 
@@ -110,36 +110,60 @@ void scene_structure::display_gui()
 {   cgp::vec3 cam_position = camera_control.camera_model.position();
 	
 	//parametre for the environment
+	if(ImGui::CollapsingHeader("Background parameters")) {
+		ImGui::Indent();
 	ImGui::SliderFloat("Background scale", &environment.background.scale, 0.1f, 10.0f);
 	ImGui::SliderFloat("Background distance", &environment.background.distance, 1.0f, 50.0f);
 	ImGui::Combo("Background type", &environment.background.type, "Checkerboard\0Gradient\0Stars\0");
 	ImGui::Checkbox("Frame", &gui.display_frame);
 	ImGui::Checkbox("Realistic raytracing(beta)",&gui.realistic_raytracing);
+	ImGui::Unindent();
+	}	
+	ImGui::Spacing();ImGui::Separator();ImGui::Spacing();
 
+ 
 	//parametre for the camera
+	ImGui::Text("Camera");
 	ImGui::Text("Cam pos: (%.2f, %.2f, %.2f)", cam_position.x, cam_position.y, cam_position.z);
 	vec3 cam_dir=normalize(-inverse(camera_control.camera_model.matrix_view())[2].xyz());
 	ImGui::Text("Cam orientation: (%.2f, %.2f, %.2f)",cam_dir.x, cam_dir.y, cam_dir.z);
-	ImGui::SliderInt("Raytracing step", &gui.raytracing_step, 1, 1000);
+
+
+	if(ImGui::CollapsingHeader("Camera and raytracing parameters")) {
+		ImGui::Indent();
+	ImGui::SliderInt("Raytracing step", &gui.raytracing_step, 100, 100000);
 	ImGui::SliderFloat("Raytracing step size", &gui.raytracing_step_size, 0.001f, 0.1f);
 	ImGui::SliderFloat("field of view", &camera_projection.field_of_view, 0.0f, 5.0f);
 	ImGui::Combo("Integrator", &gui.integrator, "RK4\0Verlet\0Symplectic Euler\0");
+	ImGui::Unindent();
+	}
+	ImGui::Spacing();ImGui::Separator();ImGui::Spacing();
 
 	//parametre for the black hole
+	ImGui::Text("Black hole");
 	ImGui::Checkbox("Show black hole", &blackhole.show_blackhole);
 	ImGui::Checkbox("white hole", &blackhole.white);
 	ImGui::SliderFloat("Kerr parameter", &blackhole.a, 0.0f, 1.0f);
+	ImGui::Spacing();ImGui::Separator();ImGui::Spacing();
 
 	//parametre for the accretion disk
+	ImGui::Text("Accretion disk");
 	ImGui::Checkbox("Accretion disk", &accretion_disk_parameters.display_accretion_disk);
+	if(ImGui::CollapsingHeader("Accretion disk parameters")) {
+		ImGui::Indent();
 	ImGui::Checkbox("red shift", &accretion_disk_parameters.red_shift);
 	ImGui::Checkbox("doppler", &accretion_disk_parameters.doppler);
 	ImGui::Checkbox("temperature realistic", &accretion_disk_parameters.temperature_realistic);
 	ImGui::SliderFloat("accretion disk temperature", &accretion_disk_parameters.accretionTemp, 1000.0f, 40000.0f);
+	ImGui::Unindent();
+	}
+	ImGui::Spacing();ImGui::Separator();ImGui::Spacing();
 
 	//parametre for the planet
-	ImGui::Text("Planet parameters");
+	ImGui::Text("Planet");
 	ImGui::Checkbox("Display planet", &planet.display_planet);
+	if(ImGui::CollapsingHeader("Planet parameters")) {
+		ImGui::Indent();
     ImGui::SliderFloat("Demi Grand Axe", &planet.demi_grand_axe, 0.0f, 10.0f);
 	ImGui::SliderFloat("Eccentricity", &planet.eccentricity, 0.0f, 1.0f);
 	ImGui::SliderFloat("Inclination", &planet.inclination, 0.0f, 3.14f);
@@ -149,6 +173,11 @@ void scene_structure::display_gui()
 	ImGui::SliderFloat("Planet radius", &planet.rp, 0.0f, 1.0f);
 	ImGui::ColorEdit3("Planet color", &planet.planet_color.x);
 	ImGui::Text("Planet color: (%.2f, %.2f, %.2f)", planet.planet_color.x, planet.planet_color.y, planet.planet_color.z);
+	ImGui::Unindent();
+
+
+	ImGui::Spacing();ImGui::Separator();ImGui::Spacing();
+	}
 }
 
 void scene_structure::mouse_move_event()
