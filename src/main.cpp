@@ -314,7 +314,7 @@ void display_gui_default()
 		//  This limits the risk of having different behaviors when you use different machine. 
 		ImGui::Checkbox("FPS limiting",&project::fps_limiting);
 		if(project::fps_limiting){
-			ImGui::SliderFloat("FPS limit",&project::fps_max, 10, 250);
+			ImGui::SliderFloat("FPS limit",&project::fps_max, 3, 250);
 		}
 #endif
 		// vsync is the default synchronization of frame refresh with the screen frequency
