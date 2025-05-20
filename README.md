@@ -6,7 +6,7 @@ We use nature unit G=c=h=1. And for convinient, we choose the mass of black hole
 
 To realise the visualisation, we used the ray-tracing. To execute ray-tracing with such setup, we create a rectangle that is fixed with the Window. For each pixel in the window, we calculate the direction of light with respect to a observer at the origin(so the light propagate straightly "before the screen"). With the origin and the direction we can use the numerical integration to perform a ray-tracing.
 
-We didn't use the language of GR. In the opposite, we use an approximate form of GR's gravity to compute the trajactory of light. Each time it hits a object that is light source it remenbers the intensity of light that is generated bt the object until it hits a object that absord the light or goes to infinite long. A more realitic alogrithme based on the work of Interstella is implemented but still in test. For the black hole we add two bottons to modify the dynamic terms: "white hole" to repulse the 
+We didn't use the language of GR. But, we use an approximate form of GR's gravity to compute the trajactory of light. Each time it hits an object that is light source it remenbers the intensity of light that is generated bt the object until it hits a object that absord the light or goes to infinite long. A more realitic alogrithme based on the work of Interstella is implemented but still in test. For the black hole we add two bottons to modify the dynamic terms: "white hole" to repulse the 
 
 There are three light sources are considered in the We didn't consider the reflection of light: the accretion disk, the planet and a background.
 

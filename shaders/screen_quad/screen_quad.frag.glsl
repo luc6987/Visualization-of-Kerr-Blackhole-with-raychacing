@@ -135,6 +135,10 @@ vec3 toSpherical(vec3 pos){
     return vec3(rho, theta, phi);
 }
 
+//------------------------------------------------------
+// numerical integration functions
+
+
 vec3 acceleration(float h2, vec3 pos, vec3 vel) {
     // calculate the acceleration of the particle
 
@@ -182,15 +186,18 @@ void verlet(inout vec3 x, inout vec3 v, float h2, float dt) {
 
     x += v * dt + 0.5 * a0 * dt * dt;
 
-    vec3 a1 = acceleration(h2, x, v); // 重新计算新位置的加速度（v 还没变）
+    vec3 a1 = acceleration(h2, x, v); 
 
     v += 0.5 * (a0 + a1) * dt;
 }
 
 void symplectic_euler(inout vec3 x, inout vec3 v, float h2, float dt) {
-    v += dt * acceleration(h2, x, v); // 先更新动量
-    x += dt * v;                      // 再更新位置（用新 v）
+    v += dt * acceleration(h2, x, v); 
+    x += dt * v;                   
 }
+
+//------------------------------------------------------
+// background functions
 
 float star_map_uv(vec2 uv) {
     // the star map is a 2D texture, so we need to convert the UV coordinates to 0-1 range
@@ -208,14 +215,15 @@ float star_map_uv(vec2 uv) {
 }
 vec3 getSkyPaletteColor(float t) {
     vec3 colors[5];
-    colors[0] = vec3(1.0, 0.5, 0.3);  // M型：暗红
-    colors[1] = vec3(1.0, 0.7, 0.4);  // K型：橙色
-    colors[2] = vec3(1.0, 0.95, 0.7); // G型：太阳黄
-    colors[3] = vec3(1.0, 1.0, 0.9);  // F型：中性白
-    colors[4] = vec3(0.9, 0.95, 1.0); // A型：轻微冷色
+    // we use the typical color of stars as the color palette
+    colors[0] = vec3(1.0, 0.5, 0.3);  // M type : red
+    colors[1] = vec3(1.0, 0.7, 0.4);  // K type : orange
+    colors[2] = vec3(1.0, 0.95, 0.7); // G type : yellow
+    colors[3] = vec3(1.0, 1.0, 0.9);  // F type : white
+    colors[4] = vec3(0.9, 0.95, 1.0); // A type : blue
 
     float noise = fract(sin(dot(uv * 100.0, vec2(12.9898, 78.233))) * 43758.5453);
-    t = clamp(t + (noise - 0.5) * 0.2, 0.0, 1.0); // 加噪声扰动
+    t = clamp(t + (noise - 0.5) * 0.2, 0.0, 1.0); // add noise perturbation
 
     float scaled = t * 4.0;
     int i = int(floor(scaled));
@@ -275,6 +283,9 @@ vec3 background_color(vec3 x, vec3 direction) {
     else
         return background_plane(x, direction);
 }
+
+//------------------------------------------------------
+// accretion disk functions
 
 vec4 getBlackBodyColor(float temp)
 {
@@ -412,6 +423,9 @@ void diskRender(vec3 pos, inout vec4 color, inout float alpha, vec3 viewDir){
          color /= doppler * doppler * doppler;}
 }
 
+//------------------------------------------------------
+// Planet functions
+
 float solveKepler(float M, float e) {
     float E = M;
     for (int i = 0; i < 5; ++i) { 
@@ -481,6 +495,7 @@ vec3 planet_grid_color(vec3 pos, vec3 planet_pos, out float grid) {
     return vec3(0.0); // grid_color
 }
 
+//------------------------------------------------------
 
 vec3 raytrace(Ray ray) {
     float t = time;
@@ -540,6 +555,8 @@ vec3 raytrace(Ray ray) {
 
 
 //----------------------------------------------------------
+//-------------------------------------------------------
+// realistic raytracing functions
 struct Geodesic {
     float r;
     float theta;
@@ -850,7 +867,7 @@ Geodesic RK4_step(Geodesic g, float h) {
     float k1_p_r = f_p_r(g);
     float k1_p_theta = f_p_theta(g);
 
-    // --- k2 状态 ---
+    // --- k2  ---
     Geodesic gk2;
     gk2.r = g.r + 0.5 * h * k1_r;
     gk2.theta = g.theta + 0.5 * h * k1_theta;
@@ -865,7 +882,7 @@ Geodesic RK4_step(Geodesic g, float h) {
     float k2_p_r = f_p_r(gk2);
     float k2_p_theta = f_p_theta(gk2);
 
-    // --- k3 状态 ---
+    // --- k3  ---
     Geodesic gk3;
     gk3.r = g.r + 0.5 * h * k2_r;
     gk3.theta = g.theta + 0.5 * h * k2_theta;
@@ -880,7 +897,7 @@ Geodesic RK4_step(Geodesic g, float h) {
     float k3_p_r = f_p_r(gk3);
     float k3_p_theta = f_p_theta(gk3);
 
-    // --- k4 状态 ---
+    // --- k4  ---
     Geodesic gk4;
     gk4.r = g.r + h * k3_r;
     gk4.theta = g.theta + h * k3_theta;
@@ -895,7 +912,7 @@ Geodesic RK4_step(Geodesic g, float h) {
     float k4_p_r = f_p_r(gk4);
     float k4_p_theta = f_p_theta(gk4);
 
-    // --- 更新 geodesic ---
+    // --- update geodesic ---
     Geodesic g_new;
     g_new.r = g.r + (h / 6.0) * (k1_r + 2.0 * k2_r + 2.0 * k3_r + k4_r);
     g_new.theta = g.theta + (h / 6.0) * (k1_theta + 2.0 * k2_theta + 2.0 * k3_theta + k4_theta);
@@ -905,13 +922,14 @@ Geodesic RK4_step(Geodesic g, float h) {
 
 
     // --- 角度归一化 ---
-    // theta 限制 [0, pi]
+    // normalize the angles
+    // theta: [0, pi]
     if (g_new.theta < 0.0) g_new.theta = -g_new.theta;
     if (g_new.theta > 3.14159265359) g_new.theta = 3.14159265359 - (g_new.theta - 3.14159265359);
 
-    // phi 限制 [0, 2pi]
+    // phi: [0, 2pi]
     float two_pi = 6.28318530718;
-    g_new.phi = mod(g_new.phi, two_pi);  // GLSL 中 mod(a,b) = a - b * floor(a/b)
+    g_new.phi = mod(g_new.phi, two_pi);  // in glsl: mod(x, y) = x - y * floor(x/y)
 
     return g_new;
 }
