@@ -1,7 +1,5 @@
 #version 330 core
 
-
-
 in vec2 uv;//the texture coordinates passed in
 out vec4 frag_color;// output color
 
@@ -21,7 +19,6 @@ const float beta = 0.0f; // velocity of camera for realistic_raytracing
 uniform int show_blackhole;
 uniform int white;
 uniform float a; // Kerr black hole spin parameter
-
 
 // parameters for accretion disk
 uniform int display_accretion_disk;
@@ -147,7 +144,7 @@ vec3 acceleration(float h2, vec3 pos, vec3 vel) {
 
     vec3 acc = vec3(0.0);
 
-    // 1. the Schwarzschild term
+    // 1. the Schwarzschild term(approximated as -h2 * pos / r^3)
     if (white == 1) {
         acc += 1.5 * h2 * pos / pow(r2, 2.5);  // repulsive
         return acc;
@@ -295,8 +292,6 @@ vec4 getBlackBodyColor(float temp)
     vec3 color = brightness * vec3(r, g, b);
     return vec4(clamp(color, 0.0, 1.0), 1.0);
 }
-
-
 
 float calculateRedShift(vec3 pos)
 {
@@ -497,7 +492,7 @@ vec3 raytrace(Ray ray) {
     float h2 = dot(h, h);
 
     vec4 accumulated_color = vec4(0.0); 
-    float alpha = 1.0;
+    float alpha = 1.0f;
 
     for (int i = 0; i < max_steps; ++i) {
         // take a step
