@@ -1,7 +1,7 @@
 
 ## 🌌 Project Overview
 
-The visualization is based on **ray tracing**. A screen-aligned rectangle (quad) is rendered in front of a virtual camera placed at the origin. For each pixel, we calculate the initial direction of a light ray as perceived by an observer at the origin. We then simulate the light’s trajectory using numerical integration.
+The visualization is based on **ray tracing**. A screen-aligned rectangle (quad) is rendered in front of a virtual camera placed at the origin. For each pixel, we calculate the initial direction of a light ray as perceived by an observer in front of the origin. We then simulate the light’s trajectory using numerical integration.
 
 We don’t directly use the full tensorial machinery of General Relativity (GR). Instead, we implement an **approximate gravitational model** inspired by GR to compute the deflection of light rays. Each time a ray hits a luminous object, it accumulates light intensity. The tracing continues until the ray is either absorbed or escapes to infinity.
 
