@@ -1,18 +1,56 @@
-# Visualization-of-Kerr-Blackhole-with-raychacing
 
-This is a projet to visualise a black hole with tracing using OpenGl 3.3 and cgp-a library universal that can be deployed on differents OS including windows, linux and MacOs.
+## 🌌 Project Overview
 
-We use nature unit G=c=h=1. And for convinient, we choose the mass of black hole M=1.
+The visualization is based on **ray tracing**. A screen-aligned rectangle (quad) is rendered in front of a virtual camera placed at the origin. For each pixel, we calculate the initial direction of a light ray as perceived by an observer at the origin. We then simulate the light’s trajectory using numerical integration.
 
-To realise the visualisation, we used the ray-tracing. To execute ray-tracing with such setup, we create a rectangle that is fixed with the Window. For each pixel in the window, we calculate the direction of light with respect to a observer at the origin(so the light propagate straightly "before the screen"). With the origin and the direction we can use the numerical integration to perform a ray-tracing.
+We don’t directly use the full tensorial machinery of General Relativity (GR). Instead, we implement an **approximate gravitational model** inspired by GR to compute the deflection of light rays. Each time a ray hits a luminous object, it accumulates light intensity. The tracing continues until the ray is either absorbed or escapes to infinity.
 
-We didn't use the language of GR. But, we use an approximate form of GR's gravity to compute the trajactory of light. Each time it hits an object that is light source it remenbers the intensity of light that is generated bt the object until it hits a object that absord the light or goes to infinite long. A more realitic alogrithme based on the work of Interstella is implemented but still in test. For the black hole we add two bottons to modify the dynamic terms: "white hole" to repulse the 
+> A more realistic algorithm, inspired by the rendering techniques used in *Interstellar*, is also implemented and available in experimental mode.
 
-There are three light sources are considered in the We didn't consider the reflection of light: the accretion disk, the planet and a background.
+## ✨ Features
 
-The accretion disk part refers another excellent precedent work(see:).
+### 🔁 White Hole Mode
 
-The planet strictly follows a newtonian trajectory ignoring its intereactions with accretion disk and blackhole. We use Kepler's six parameter to describe the mouvement of a planet. 
+A toggle allows you to switch the black hole into a **white hole** mode, where it repels light rather than absorbing it.
 
-There are two types of background: spherical and plannel. When the light goes far enough to the origin we considere the the light goes to infinite far. At this time we record the position and the direction of light. With a pre-generated backgound starfield, we can deternmine the trajactory of light hit which star. And this time, "Background Scale" decides the number of stars and "Backgound distance" decides the density of the stars. As for the plane, we create a plane infinite large at z=-d. At this time,  "Background Scale" decides the size of checkboard and "Backgound distance" decides d.  
+### 💡 Light Sources
 
+There are three types of light sources considered in the scene:
+
+#### 1. Accretion Disk
+
+The accretion disk implementation is based on excellent prior work (see reference below). It simulates glowing matter spiraling into the black hole.
+
+#### 2. Planet
+
+The planet follows a **Newtonian Keplerian orbit** defined by six classical orbital elements. It does not interact with the black hole or the accretion disk.
+
+#### 3. Background
+
+Two types of background rendering are available:
+
+- **Spherical Starfield**:
+  - A procedurally generated skybox of stars.
+  - If a light ray escapes far enough, its final direction is used to determine which star it intersects.
+  - `Background Scale`: Controls the number of visible stars.
+  - `Background Distance`: Controls star density and the definition of "infinity".
+
+- **Plane Background**:
+  - A virtual checkerboard plane located at \( z = -d \).
+  - `Background Scale`: Controls checker size.
+  - `Background Distance`: Sets the value of \( d \), i.e., the plane’s distance.
+
+## 🧮 Technical Details
+
+- All ray tracing is performed in **GLSL fragment shaders**.
+- Supported numerical integration methods:
+  - Runge-Kutta 4 (RK4)
+  - Verlet
+  - Symplectic Euler
+- Modular structure: easy to extend with new physical models or shaders.
+- Real-time rendering with configurable visual parameters.
+
+## 📚 Reference
+
+The accretion disk model is based on the work by **[hydrogendeuteride](https://github.com/hydrogendeuteride)**.  
+👉 [BlackHoleRayTracer](https://github.com/hydrogendeuteride/BlackHoleRayTracer)
