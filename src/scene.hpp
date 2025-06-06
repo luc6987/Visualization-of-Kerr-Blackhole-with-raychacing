@@ -15,7 +15,7 @@ struct gui_parameters {
 	bool display_frame = false;// Display the global frame
 	int raytracing_step = 512;// Number of steps for the raytracing
 	float raytracing_step_size = 0.05f;// Step size for the raytracing
-	int integrator = 0;// Integrator used for the raytracing 0: RK4, 1: Verlet, 2: symplectic Euler
+	int integrator = 2;// Integrator used for the raytracing 0: RK4, 1: Verlet, 2: symplectic Euler
 	bool realistic_raytracing=false;// Use the realistic raytracing
 };
 

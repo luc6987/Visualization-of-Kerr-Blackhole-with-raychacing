@@ -121,9 +121,11 @@ void animation_loop()
 
 
 	// Display the ImGUI interface (button, sliders, etc)
-	display_gui_default();
-	scene.display_gui();
-
+	if (gui_visible) {
+		display_gui_default();
+		scene.display_gui();
+	}
+	
 	// Handle camera behavior in standard frame
 	scene.idle_frame();
 
@@ -134,7 +136,9 @@ void animation_loop()
 
 	// End of ImGui display and handle GLFW events
 	ImGui::End();
-	imgui_render_frame(scene.window.glfw_window);
+	if (gui_visible) {
+		imgui_render_frame(scene.window.glfw_window);
+	}
 	glfwSwapBuffers(scene.window.glfw_window);
 	glfwPollEvents();
 }
@@ -168,7 +172,7 @@ void window_size_callback(GLFWwindow* window, int width, int height);
 void mouse_move_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_click_callback(GLFWwindow* window, int button, int action, int mods);
-void keyboard_callback(GLFWwindow* window, int key, int, int action, int mods);
+void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 // Standard initialization procedure
 window_structure standard_window_initialization()
@@ -262,6 +266,12 @@ void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, in
 	if(!imgui_capture_keyboard){
 		scene.inputs.keyboard.update_from_glfw_key(key, action);
 		scene.keyboard_event();
+
+		// Press 'G' to toggle GUI visibility
+		if (key == GLFW_KEY_G && action == GLFW_PRESS) {
+			gui_visible = !gui_visible;
+			std::cout << "GUI " << (gui_visible ? "show" : "hide") << std::endl;
+		}
 
 		// Press 'F' for full screen mode
 		if (key == GLFW_KEY_F && action == GLFW_PRESS && scene.inputs.keyboard.shift) {

@@ -1,0 +1,447 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+
+\geometry{margin=1in}
+
+\title{Visualization of Kerr Black Hole Based on Ray Tracing}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+In general relativity, black holes are regions of extreme spacetime curvature where the gravitational field is so strong that even light cannot escape. To visualize the gravitational effects of black holes, we employ ray tracing techniques to simulate the propagation paths of light rays around black holes. This paper will introduce how to implement this process using C++ and OpenGL 3.3, demonstrating both Newtonian gravitational approximation and real simulation methods based on general relativity.
+
+\section{How to Implement Ray Tracing with CGP and OpenGL 3.3}
+
+We use CGP as the graphics library interface and OpenGL 3.3 for rendering. The core concept of ray tracing is to trace rays from the camera along the direction of each pixel, calculating their interactions with black holes and other celestial bodies.
+
+The ray tracing implementation is divided into two main parts: the ray tracing core algorithm and the rendering module. The ray tracing core algorithm is responsible for calculating the propagation paths of light rays in the black hole's gravitational field, while the rendering module is responsible for visualizing the calculation results.
+
+The ray tracing implementation requires the following steps:
+\begin{enumerate}
+    \item Define the ray class, including the ray's origin and direction.
+    \item Implement the ray tracing core algorithm to calculate the propagation paths of light rays in the black hole's gravitational field.
+    \item Implement the accretion disk rendering model to simulate the luminous plasma structures around the black hole.
+    \item Implement the planetary orbit simulation module to display planetary orbits near the black hole.
+    \item Implement the background rendering module to render the starry sky and virtual ground in the distance from the black hole.
+\end{enumerate}
+
+The visualization implementation has two modules: Newtonian gravitational approximation and real simulation based on general relativity.
+
+\section{Newtonian Gravitational Approximation}
+
+\subsection{Ray Tracing Core Algorithm}
+
+A ray \texttt{Ray} is represented by two \texttt{vec3} vectors:
+
+\begin{enumerate}
+    \item \texttt{origin} represents the current position of the ray
+    \item \texttt{Direction} represents the ray direction
+\end{enumerate}
+
+For light propagation in curved space, we use the following assumptions and dynamical model:
+
+\begin{enumerate}
+    \item The ray's trajectory is only bent by the influence of the black hole (i.e., we do not consider the effects of other celestial bodies on the ray)
+    \item Light rays propagate in straight lines in front of the screen
+    \item After a certain period of propagation, light rays directly fall into infinity
+\end{enumerate}
+
+During propagation, the ray satisfies the equation:
+
+\begin{equation}
+\boxed{
+\begin{cases}
+\displaystyle \frac{d\vec{x}}{dt} = \vec{v}(t) \\[10pt]
+\displaystyle \vec{a}=\frac{d\vec{v}}{dt} = -\frac{3}{2} \cdot \frac{|\vec{x}\times\vec{v}|^2 \vec{x}}{|\vec{x}|^5} + \frac{2a}{|\vec{x}|^3} \left( \vec{v} \times \hat{z} \right)
+\end{cases}
+}
+\end{equation}
+
+where $\vec{x}$ is the ray's position, $\vec{v}$ is the ray's velocity, $\hat{z}$ is the black hole's spin axis direction, and $a$ is the black hole's spin parameter. When the whitehole option is checked, the first term in the second equation takes the opposite sign. Initially, we default $a$ to 0, meaning the black hole is non-spinning, but $a$ can be controlled through the GUI.
+
+We use three numerical computation methods to calculate light propagation: RK4, Verlet integration, and symplectic Euler method.
+
+\subsubsection{Runge-Kutta Fourth-Order Method (RK4)}
+
+RK4 is a fourth-order explicit method. Each step update is:
+
+\begin{align}
+\vec{k}_1^v &= \vec{a}(\vec{x}, \vec{v}) \\
+\vec{k}_1^x &= \vec{v} \\
+\vec{k}_2^v &= \vec{a}(\vec{x} + \tfrac{1}{2}\Delta t \cdot \vec{k}_1^x,\; \vec{v} + \tfrac{1}{2}\Delta t \cdot \vec{k}_1^v) \\
+\vec{k}_2^x &= \vec{v} + \tfrac{1}{2}\Delta t \cdot \vec{k}_1^v \\
+\vec{k}_3^v &= \vec{a}(\vec{x} + \tfrac{1}{2}\Delta t \cdot \vec{k}_2^x,\; \vec{v} + \tfrac{1}{2}\Delta t \cdot \vec{k}_2^v) \\
+\vec{k}_3^x &= \vec{v} + \tfrac{1}{2}\Delta t \cdot \vec{k}_2^v \\
+\vec{k}_4^v &= \vec{a}(\vec{x} + \Delta t \cdot \vec{k}_3^x,\; \vec{v} + \Delta t \cdot \vec{k}_3^v) \\
+\vec{k}_4^x &= \vec{v} + \Delta t \cdot \vec{k}_3^v \\
+\vec{x} &\leftarrow \vec{x} + \frac{\Delta t}{6}(\vec{k}_1^x + 2\vec{k}_2^x + 2\vec{k}_3^x + \vec{k}_4^x) \\
+\vec{v} &\leftarrow \vec{v} + \frac{\Delta t}{6}(\vec{k}_1^v + 2\vec{k}_2^v + 2\vec{k}_3^v + \vec{k}_4^v)
+\end{align}
+
+\subsubsection{Verlet Integration}
+
+Verlet is a second-order integration method with the following steps:
+
+\begin{align}
+\vec{a}_0 &= \vec{a}(\vec{x}, \vec{v}) \\
+\vec{x} &\leftarrow \vec{x} + \vec{v} \Delta t + \tfrac{1}{2} \vec{a}_0 \Delta t^2 \\
+\vec{a}_1 &= \vec{a}(\vec{x}, \vec{v}) \\
+\vec{v} &\leftarrow \vec{v} + \tfrac{1}{2}(\vec{a}_0 + \vec{a}_1) \Delta t
+\end{align}
+
+\subsubsection{Symplectic Euler Method}
+
+Symplectic Euler is the most basic symplectic method with the following structure:
+
+\begin{align}
+\vec{v} &\leftarrow \vec{v} + \Delta t \cdot \vec{a}(\vec{x}, \vec{v}) \\
+\vec{x} &\leftarrow \vec{x} + \Delta t \cdot \vec{v}
+\end{align}
+
+\subsubsection{Method Comparison Table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Method & Cost per Step & Global Error & Conservation & Stability & Real-time Usability \\
+\midrule
+Runge-Kutta 4 & 4 acceleration calculations & $O(\Delta t^4)$ & $\times$ & \checkmark & Medium \\
+Verlet & 2 acceleration calculations & $O(\Delta t^2)$ & \checkmark & \checkmark & Medium \\
+Symplectic Euler & 1 acceleration calculation & $O(\Delta t)$ & \checkmark & Medium & \checkmark \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of numerical integration methods}
+\end{table}
+
+\subsection{Ray Tracing Implementation Framework}
+
+Several camera parameters are passed from the CPU, and after processing, we can obtain the ray from any point on the screen.
+
+\texttt{vec3 raytrace(Ray ray)}
+
+\begin{itemize}
+    \item \textbf{input:} direction from a pixel on the screen relative to the observer, the actual spatial position of the pixel as origin
+    \item \textbf{output:} the final color of that pixel.
+    \item We initialize the color vector to black and the physical quantities corresponding to the ray
+    \item We use numerical methods to step-by-step calculate the ray's direction and position at each small time moment dt and update the state.
+    \item \textbf{Ray absorption:} If the ray enters the event horizon, return the current color
+    \item \textbf{Accretion disk rendering:} If the ray ``passes through'' the accretion disk, add the accretion disk emission to the accumulated color based on the ray's position, direction, and accretion disk parameters.
+    \item \textbf{Planet display:} If the ray hits a planet, add the planet's color to the accumulated color based on the planet's parameters and return.
+    \item \textbf{Ray propagation to infinity:} After a specified number of steps, exit the loop, add background to the accumulated color, and return.
+\end{itemize}
+
+\subsection{Accretion Disk Rendering Model}
+
+To achieve realistic accretion disk visualization in black hole rendering, we designed and implemented the \texttt{diskRender} function to simulate the luminous plasma structures rotating around the black hole. This module integrates physical models, procedural texture generation, and relativistic effects, ultimately generating dynamic luminous patterns in the fragment shader.
+
+\subsubsection{Geometric Modeling and Density Distribution}
+
+The accretion disk is modeled as a flat body distributed on the $y=0$ plane, with density controlled by functions in vertical and radial directions:
+
+\begin{itemize}
+    \item Disk height is controlled by \texttt{diskHeight}, with vertical density decay exponent \texttt{diskDensityV};
+    \item Radial range is defined by \texttt{innerRadius} and \texttt{outerRadius};
+    \item Horizontal density decay is constrained by the power function $\propto r^{-\alpha}$, where $\alpha = \text{diskDensityH}$;
+    \item All positions are converted to spherical coordinates \texttt{sphericalCoord} for sampling procedural noise.
+\end{itemize}
+
+\subsubsection{Procedural Noise Perturbation}
+
+We add dynamic perturbations to the accretion disk to simulate the inhomogeneity of hot gas:
+
+\begin{itemize}
+    \item Uses fractal recursive Simplex noise $\text{snoise}(\cdot)$;
+    \item Each noise level incorporates different time factors to simulate disk rotation and turbulent flow;
+    \item Noise levels are controlled by \texttt{diskNoiseLOD}, adjustable at runtime.
+\end{itemize}
+
+\subsubsection{Relativistic Effects Modeling}
+
+Light emitted from the accretion disk is affected by the following two key frequency shift effects during propagation:
+
+\paragraph{Gravitational Redshift}
+
+Using the approximate formula in Schwarzschild spacetime:
+
+\begin{equation}
+z = \sqrt{1 - \frac{r_s}{r}} - 1
+\end{equation}
+
+Manifesting in coloring as temperature redshift (dimming and reddening):
+
+\begin{equation}
+T \leftarrow \frac{T}{1 + z}
+\end{equation}
+
+\paragraph{Line-of-sight Doppler Shift}
+
+Based on the accretion disk circular orbital velocity $v = \sqrt{\frac{1 - 3/r}{r}}$, combined with the observation direction, calculate the relativistic Doppler factor:
+
+\begin{equation}
+D = \gamma(1 + \vec{v} \cdot \hat{n})
+\end{equation}
+
+Final temperature correction:
+
+\begin{equation}
+T \leftarrow \frac{T}{D}
+\end{equation}
+
+and multiply by brightness factor $\propto D^3$ to simulate relativistic luminosity boosting.
+
+\subsubsection{Black Body Color Mapping}
+
+Local disk temperature is mapped to RGB values through the \texttt{getBlackBodyColor(temp)} function:
+
+\begin{itemize}
+    \item Temperature range is limited to $[1000K, 12000K]$;
+    \item Uses \texttt{smoothstep} to construct continuous color bands from red to blue-white;
+    \item Brightness is enhanced by $\sqrt{T}$, approximating the Stefan–Boltzmann radiation law.
+\end{itemize}
+
+\subsubsection{Rendering Formula Summary}
+
+Final color values are superimposed as follows:
+
+\begin{equation}
+\text{color} \mathrel{+}= \rho(x) \cdot \alpha \cdot \text{noise}(x) \cdot C(T_{\text{eff}}(x))
+\end{equation}
+
+where:
+
+\begin{itemize}
+    \item $\rho(x)$ is local density;
+    \item $C(T)$ is the black body color function;
+    \item $T_{\text{eff}}(x)$ includes frequency shift corrections;
+    \item If \texttt{temperature\_realistic} is enabled, then $T \propto r^{-3/4}.$
+\end{itemize}
+
+\subsubsection{Configurable Parameters}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+Parameter Name & Meaning \\
+\midrule
+\texttt{accretionTemp} & Accretion disk base temperature \\
+\texttt{temperature\_realistic} & Whether to enable realistic temperature decay \\
+\texttt{red\_shift} & Whether to enable gravitational redshift \\
+\texttt{display\_accretion\_disk} & Whether to use relativistic velocity model \\
+\texttt{diskNoiseLOD} & Noise levels \\
+\texttt{diskDensityV/H} & Vertical/radial density control exponents \\
+\bottomrule
+\end{tabular}
+\caption{Configurable parameters for accretion disk rendering}
+\end{table}
+
+This model provides a good balance between visual realism and performance, suitable for dynamically simulating brightness fluctuations, color transitions, and relativistic beaming visual effects of accretion disks.
+
+\subsection{Planetary Orbit Simulation Module}
+
+This module models and renders planetary motion near black holes through classical celestial mechanics, displaying their time-varying orbital positions and surface grid lines. This section includes three main parts: Kepler equation solving, orbital parameter transformation, and geographic coordinate coloring.
+
+\subsubsection{Planetary Orbital Modeling}
+
+Planetary positions are calculated using six classical orbital elements (Keplerian elements):
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+Parameter Name & Physical Meaning \\
+\midrule
+\texttt{A} & Semi-major axis (demi\_grand\_axe) \\
+\texttt{e} & Eccentricity \\
+\texttt{i} & Orbital inclination \\
+$\Omega$ & Longitude of ascending node (longtitude\_du\_noeud\_ascendant) \\
+$\omega$ & Argument of periapsis (argument\_du\_periapside) \\
+$M_0$ & Initial mean anomaly (mean\_anomaly) \\
+\bottomrule
+\end{tabular}
+\caption{Keplerian orbital elements}
+\end{table}
+
+The orbital position of a planet at any time $t$ is obtained through the following steps:
+
+\begin{enumerate}
+    \item Calculate current mean anomaly: $M = M_0 + nt$, where $n = \sqrt{1/A^3}$ is the mean motion angular velocity;
+    \item Use Newton-Raphson method to iteratively solve Kepler's equation:
+    \begin{equation}
+    E - e \sin E = M
+    \end{equation}
+    \item Use eccentric anomaly $E$ to solve for true anomaly $\nu$ and orbital radius $r$;
+    \item Transform from orbital coordinate system $(x, y)$ to three-dimensional space coordinates $(X, Y, Z)$, considering inclination and rotation.
+\end{enumerate}
+
+This process is implemented through \texttt{computePlanetPosition(t)}.
+
+\subsubsection{Kepler Equation Solver}
+
+Function \texttt{solveKepler(M, e)} uses five Newton-Raphson iterations to quickly approximate the solution for $E$:
+
+\begin{align}
+f(E) &= E - e \sin E - M \\
+f'(E) &= 1 - e \cos E \\
+E_{n+1} &= E_n - \frac{f(E_n)}{f'(E_n)}
+\end{align}
+
+Since $e < 1$ and $M$ is bounded, 5 iterations are sufficient for visualization accuracy requirements.
+
+\subsubsection{Orbital Position Output}
+
+Final output of planetary position in three-dimensional space:
+
+\begin{equation}
+\vec{r}(t) =
+\begin{bmatrix}
+r (\cos \Omega \cos(\omega + \nu) - \sin \Omega \sin(\omega + \nu)\cos i) \\
+r (\sin \Omega \cos(\omega + \nu) + \cos \Omega \sin(\omega + \nu)\cos i) \\
+r \sin(\omega + \nu) \sin i
+\end{bmatrix}
+\end{equation}
+
+The code returns \texttt{vec3(X, Z, Y)} to adapt to the right-handed coordinate system.
+
+\subsubsection{Grid Texture Coloring}
+
+Function \texttt{planet\_grid\_color(...)} simulates planetary surface longitude and latitude lines:
+
+\begin{enumerate}
+    \item Convert viewing direction \texttt{pos - planet\_pos} to spherical coordinates $(\theta, \phi)$;
+    \item Use modulo operations and \texttt{step} function to determine proximity to meridians or parallels;
+    \item Output parameter \texttt{grid} is used for overlay grid line rendering.
+\end{enumerate}
+
+In default settings, grid line spacing is $30^\circ$ with line width of $2^\circ$.
+
+While this module does not consider gravitational bending and other relativistic effects in rendering, its orbital solution is completely based on Keplerian mechanics, suitable for representing stable celestial body motion characteristics at far distances from black holes.
+
+\subsection{Background Rendering Module}
+
+This module is responsible for rendering two types of visual backgrounds: the distant starry sky around the black hole and the virtual checkerboard ground. In ray tracing, if a ray is not absorbed by the black hole or other objects, the final background color contribution is determined based on its direction. There are two types of backgrounds:
+
+\begin{enumerate}
+    \item Spherical Sky background,
+    \item Virtual ground background (Plane).
+\end{enumerate}
+
+\subsubsection{Spherical Sky Background Rendering}
+
+Function \texttt{background\_sky\_sphere(direction)} uses unit sphere mapping to map any direction vector \texttt{direction} to UV coordinates in the $[0,1]^2$ range:
+
+\begin{align}
+u &= 0.5 + \frac{\arctan(x, y)}{2\pi} \\
+v &= \frac{\arccos(-z)}{\pi}
+\end{align}
+
+Then scale according to \texttt{background\_distance}, pass to star map function \texttt{star\_map\_uv(uv)} to obtain corresponding intensity, then use \texttt{skyColor(...)} to get actual RGB values.
+
+\subsubsection{Star Map Sampling (\texttt{star\_map\_uv})}
+
+This function is the core of procedurally generating star map noise, with the following steps:
+
+\begin{enumerate}
+    \item Quantize UV coordinates to 512 pixel grid;
+    \item Sample hash function for coordinates at different frequencies;
+    \item Use \texttt{smoothstep} and \texttt{mix} to control star density and probability distribution, density can be controlled through \texttt{background\_scale}.
+\end{enumerate}
+
+Star map intensity is defined as:
+
+\begin{equation}
+\text{star} = \text{smoothstep}(\text{threshold}, 1.0, s_1) \cdot s_2
+\end{equation}
+
+\subsubsection{Sky Color Palette (\texttt{getSkyPaletteColor})}
+
+Defines typical colors for five main sequence star types:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+Type & Color & Description \\
+\midrule
+M & (1.0, 0.5, 0.3) & Red giant \\
+K & (1.0, 0.7, 0.4) & Orange star \\
+G & (1.0, 0.95, 0.7) & Yellow main sequence (sun-like) \\
+F & (1.0, 1.0, 0.9) & White star \\
+A & (0.9, 0.95, 1.0) & Blue-white star \\
+\bottomrule
+\end{tabular}
+\caption{Stellar color classification}
+\end{table}
+
+Star colors are interpolated in the color band with noise perturbation and intensity $t$, simulating stellar color dispersion.
+
+\subsubsection{Brightness Adjustment (\texttt{skyColor})}
+
+Brightness and contrast are adjusted as follows:
+
+\begin{equation}
+\text{brightness} = (\text{starIntensity} \cdot 2.0)^{0.8}
+\end{equation}
+
+Color modulation formula:
+
+\begin{equation}
+\text{color} = \text{baseColor} \cdot \text{brightness}
+\end{equation}
+
+\subsubsection{Virtual Ground Background (Plane)}
+
+When \texttt{background\_type != 2}, use \texttt{background\_plane(...)} to render checkerboard or virtual plane:
+
+\begin{itemize}
+    \item Only hits when ray is directed downward;
+    \item If checkerboard mode is enabled, alternately mix 0.2 and 0.95 brightness in checkerboard pattern;
+    \item Otherwise generate color gradients directly using coordinates.
+\end{itemize}
+
+\subsubsection{Background Mode Selection}
+
+Main function \texttt{background\_color(x, direction)} determines which background to use: by adjusting \texttt{background\_type}, you can switch between celestial star maps and virtual planes. Parameters like \texttt{background\_distance}, \texttt{background\_scale}, etc., allow users to flexibly control background detail representation.
+
+\section{Real Simulation Based on General Relativity}
+
+This algorithm is based on Section 2.1 (Basic Concepts) and Appendix A.1 (Ray Tracing) of arXiv:1502.03808v2. We reproduced this algorithm, but for unknown reasons, we were unable to accurately reproduce the black hole visualization phenomena.
+
+This algorithm requires as input the camera position $(r_c,\theta_c,\phi_c)$ in the FIDO coordinate system, the camera's velocity $\beta$ relative to the FIDO coordinate system and velocity direction vector $(B_r,B_\theta,B_\phi)$, as well as the incident ray direction relative to the camera $(\theta_{cs},\phi_{cs})$. After initialization, the light ray propagation trajectory can be obtained similarly.
+
+We conjecture that the reasons for the algorithm's failure are as follows:
+
+\begin{enumerate}
+    \item Instability inherent in the numerical solution itself
+    \item During the algorithm implementation process, we did not fully understand the algorithm details, leading to implementation deviations
+    \item The algorithm implementation requires higher precision numerical calculations, while the numerical methods we used may not be sufficiently accurate
+\end{enumerate}
+
+\section{Conclusion}
+
+This paper introduces how to implement Kerr black hole visualization based on ray tracing using C++ and OpenGL 3.3. We implemented two methods: Newtonian gravitational approximation and real simulation based on general relativity. Through the ray tracing core algorithm, accretion disk rendering model, planetary orbit simulation module, and background rendering module, we successfully demonstrated the complex physical phenomena of black holes and their surrounding environments.
+
+\section{References}
+
+\begin{enumerate}
+    \item \href{https://arxiv.org/abs/1502.03808v2}{arXiv:1502.03808v2} - Black hole visualization algorithm based on general relativity.
+    \item MTW, ``Gravitation'' - Classic textbook on general relativity.
+\end{enumerate}
+
+\end{document} 

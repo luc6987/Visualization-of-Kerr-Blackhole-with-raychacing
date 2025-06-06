@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/Users/yuguang/Documents/X/2A-P3/CSC_43043_EP/csc43043ep_practice_code/blackhole/Visualization-of-Kerr-Blackhole-with-raychacing/01_Introduction"
+    "cmake.sourceDirectory": "/Users/yuguang/Documents/X/2A-P3/CSC_43043_EP/csc43043ep_practice_code/blackhole/Visualization-of-Kerr-Blackhole-with-raychacing/01_Introduction",
+    "cmake.ignoreCMakeListsMissing": true
 }
