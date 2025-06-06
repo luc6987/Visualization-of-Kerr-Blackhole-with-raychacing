@@ -921,7 +921,6 @@ Geodesic RK4_step(Geodesic g, float h) {
     g_new.p_theta = g.p_theta + (h / 6.0) * (k1_p_theta + 2.0 * k2_p_theta + 2.0 * k3_p_theta + k4_p_theta);
 
 
-    // --- 角度归一化 ---
     // normalize the angles
     // theta: [0, pi]
     if (g_new.theta < 0.0) g_new.theta = -g_new.theta;
@@ -938,15 +937,15 @@ Geodesic RK4_step(Geodesic g, float h) {
 //----------------------------------------------------------
 
 vec3 background_kerr_grid(float theta, float phi) {
-    // 将 theta ∈ [0, π] 映射到 v ∈ [0,1]
+    // mappin theta ∈ [0, π] to v ∈ [0,1]
     float v = theta / PI;
 
-    // 将 phi ∈ [0, 2π] 映射到 u ∈ [0,1]
+    // mapping phi ∈ [0, 2π] to u ∈ [0,1]
     float u = phi / (2.0 * PI);
 
     vec2 uv = vec2(u, v);
 
-    float scale = background_scale*20; // 可调 uniform
+    float scale = background_scale*20; // adjustable factor
     vec2 grid = floor(uv * scale);
 
     float checker = mod(grid.x + grid.y, 2.0);
@@ -955,13 +954,13 @@ vec3 background_kerr_grid(float theta, float phi) {
 
 vec3 raytrace_kerr(Geodesic g) {
     for (int i = 0; i < max_steps; ++i) {
-        // 积分一步
+        // sigle step integration
         g = RK4_step(g, dt);
         }
     if (g.toInfinity == 1) {
         return background_kerr_grid(g.theta, g.phi);
     } else {
-        return vec3(0.0); // 黑洞吞噬
+        return vec3(0.0); // Absorption par le trou noir
     }
 
 }
@@ -976,7 +975,7 @@ void main() {
     vec3 cam_up = normalize(view_inv[1].xyz);
     vec3 cam_forward = normalize(-view_inv[2].xyz);
 
-    // 将纹理坐标转换为 NDC 坐标,d=1
+    // Convert texture coordinates to NDC coordinates    
     // supposing d=1 extract the direction of the ray
     vec2 ndc = uv * 2.0 - 1.0;
     float fov_rad = radians(fov_y);
@@ -984,7 +983,6 @@ void main() {
     float x = ndc.x * aspect_ratio * tan_half_fov;
     float y = ndc.y * tan_half_fov;
 
-    // 构造世界空间中的光线方向
     // construct the ray direction in world space
     vec3 ray_dir_world = normalize(x * cam_right +  y *cam_up + cam_forward);
 
@@ -996,12 +994,11 @@ void main() {
     //5. the direction of light is noted by two vairables:  theta_cs and phi_cs
     //6. theta_cs and phi_cs are defined as the spherical coordinates that takes z-axis as the polar axis and x-axis as the azimuthal axis
 
-    // 转到相机空间（Kip Thorne 定义的右-前-上坐标系）
+    // Transform to camera space (right-forward-up coordinate system as defined by Kip Thorne)    
     // to camera space (right-forward-up coordinate system defined by Kip Thorne)
     vec3 ray_dir_camera = mat3(view) * ray_dir_world;
 
-    // 转球坐标
-    // spherical coordinates
+    // Convert to spherical coordinates
     float theta = acos(ray_dir_camera.z); 
     float phi = atan(ray_dir_camera.y, ray_dir_camera.x); 
 
