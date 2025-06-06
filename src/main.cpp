@@ -14,6 +14,7 @@
 // *************************** //
 
 scene_structure scene;
+bool gui_visible=true;
 
 
 // The rest of this code is a generic initialization and animation loop that can be applied to different scenes

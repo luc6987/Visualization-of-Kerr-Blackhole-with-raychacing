@@ -13,13 +13,18 @@
 
 \geometry{margin=1in}
 
-\title{Visualization of Kerr Black Hole Based on Ray Tracing}
-\author{}
+\title{Visualization of Kerr Black Hole Based on Ray Tracing
+    \begin{large} 
+    \text{A Programming Project for CSC-43043-EP : Graphic Computing}
+    \end{large} }
+\author{Yuguang Yao, Gauthier Brassel, X2023}
 \date{}
 
 \begin{document}
 
 \maketitle
+
+GitHub Project Link : \href{https://github.com/luc6987/Visualization-of-Kerr-Blackhole-with-raychacing} {Visualization of Kerr Black Hole Based on Ray Tracing}
 
 \section{Introduction}
 
@@ -27,7 +32,9 @@ In general relativity, black holes are regions of extreme spacetime curvature wh
 
 \section{How to Implement Ray Tracing with CGP and OpenGL 3.3}
 
-We use CGP as the graphics library interface and OpenGL 3.3 for rendering. The core concept of ray tracing is to trace rays from the camera along the direction of each pixel, calculating their interactions with black holes and other celestial bodies.
+We use CGP as the graphics library interface and OpenGL 3.3 for rendering. The core concept of ray tracing is to trace rays from the camera along the direction of each pixel, calculating their interactions with black holes and other celestial bodies at each step.
+
+Because ray tracing is a repeatable and memory-hungry process, almost the entierety of the code used to implement it is contained in a GLSL Fragment Shader (\texttt{screen\_quad.frag.glsl}), which allows the complicated calculations to be done efficiently by the GPU instead of by a single CPU thread. The CPU-handled part of the code only initializes the window, the scene it will contain and passes the relevant information and UI inputs to the shaders.
 
 The ray tracing implementation is divided into two main parts: the ray tracing core algorithm and the rendering module. The ray tracing core algorithm is responsible for calculating the propagation paths of light rays in the black hole's gravitational field, while the rendering module is responsible for visualizing the calculation results.
 
@@ -35,8 +42,8 @@ The ray tracing implementation requires the following steps:
 \begin{enumerate}
     \item Define the ray class, including the ray's origin and direction.
     \item Implement the ray tracing core algorithm to calculate the propagation paths of light rays in the black hole's gravitational field.
-    \item Implement the accretion disk rendering model to simulate the luminous plasma structures around the black hole.
-    \item Implement the planetary orbit simulation module to display planetary orbits near the black hole.
+    \item Implement the accretion disk rendering model to simulate the luminous plasma structures around the black hole. Rays accumulates color by passing through those plasma structures.
+    \item Implement the planetary orbit simulation module to display a planet near the black hole whose effect on the planet is made visible.
     \item Implement the background rendering module to render the starry sky and virtual ground in the distance from the black hole.
 \end{enumerate}
 
@@ -163,7 +170,7 @@ The accretion disk is modeled as a flat body distributed on the $y=0$ plane, wit
 
 \subsubsection{Procedural Noise Perturbation}
 
-We add dynamic perturbations to the accretion disk to simulate the inhomogeneity of hot gas:
+We add dynamic perturbations to the accretion disk to simulate the inhomogeneity of hot gas :
 
 \begin{itemize}
     \item Uses fractal recursive Simplex noise $\text{snoise}(\cdot)$;
@@ -210,7 +217,7 @@ and multiply by brightness factor $\propto D^3$ to simulate relativistic luminos
 Local disk temperature is mapped to RGB values through the \texttt{getBlackBodyColor(temp)} function:
 
 \begin{itemize}
-    \item Temperature range is limited to $[1000K, 12000K]$;
+    \item Temperature range is limited to $[1000K, 40000K]$;
     \item Uses \texttt{smoothstep} to construct continuous color bands from red to blue-white;
     \item Brightness is enhanced by $\sqrt{T}$, approximating the Stefan–Boltzmann radiation law.
 \end{itemize}
